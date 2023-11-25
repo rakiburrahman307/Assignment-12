@@ -1,8 +1,9 @@
 import { createContext, useEffect, useState } from "react";
 import PropTypes from 'prop-types';
-import { GoogleAuthProvider, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
 import auth from "./FireBase/FirebaseConfig";
-import axios from "axios";
+import { GoogleAuthProvider, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
+
+// import axios from "axios";
 
 
 export const AuthContext = createContext();
@@ -47,26 +48,26 @@ const AuthProvider = ({ children }) => {
   // User State Change 
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
-      const userEmail = currentUser?.email || user?.email;
-      const userLoggedIn = { email: userEmail };
+      // const userEmail = currentUser?.email || user?.email;
+      // const userLoggedIn = { email: userEmail };
 
       if (currentUser) {
         setUser(currentUser);
-        axios.post('https://assignment-11-server-pi-rouge.vercel.app/jwt', userLoggedIn, { withCredentials: true })
-          .then((res) => {
-            console.log(res.data);
-          })
-          .catch((err) => {
-            console.error(err.message);
-          });
+        // axios.post('https://localhost:5000/jwt', userLoggedIn, { withCredentials: true })
+        //   .then((res) => {
+        //     console.log(res.data);
+        //   })
+        //   .catch((err) => {
+        //     console.error(err.message);
+        //   });
       } else {
-        axios.post('https://assignment-11-server-pi-rouge.vercel.app/logout', userLoggedIn, { withCredentials: true })
-          .then((res) => {
-            console.log(res.data);
-          })
-          .catch((err) => {
-            console.error(err.message);
-          });
+        // axios.post('https://assignment-11-server-pi-rouge.vercel.app/logout', userLoggedIn, { withCredentials: true })
+        //   .then((res) => {
+        //     console.log(res.data);
+        //   })
+        //   .catch((err) => {
+        //     console.error(err.message);
+        //   });
         setUser(null);
       }
       setLoading(false);

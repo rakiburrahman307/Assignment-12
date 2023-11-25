@@ -2,6 +2,7 @@
 import { Link, NavLink } from "react-router-dom";
 import './style.css'
 import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 import useAuth from "../../Hooks/useAuth";
 
 const Navbar = () => {
@@ -32,7 +33,7 @@ const Navbar = () => {
                         {navLink}
                     </ul>
                 </div>
-                <Link className="btn btn-ghost normal-case text-xl text-[#DDDDDD] ">JobSwift</Link>
+                <Link className="btn btn-ghost normal-case text-xl text-[#DDDDDD] ">UniStayHub</Link>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
@@ -69,7 +70,7 @@ const Navbar = () => {
 
                 ) : (
                     <Link
-                        to='login'
+                        to='/login'
                         className="bg-gradient-to-r from-teal-400 to-teal-600 text-white font-semibold py-2 px-4 rounded-br-full rounded-tl-full transition duration-300 ease-in-out hover:scale-x-105"
                     >
                         Login
