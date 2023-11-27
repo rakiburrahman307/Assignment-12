@@ -5,13 +5,15 @@ import Login from "../Layout/Login/Login";
 import Signup from "../Layout/SignUp/Signup";
 import Detail from "../Layout/Home/Detail";
 import PrivateRoute from "./PrivateRoute";
-import AllMeals from "../Pages/AllMeals/AllMeals";
+import ErrorPage from "../Pages/ErrorPage/ErrorPage";
+import Meals from "../Pages/Meals/Meals";
+import UpcomingMeals from "../Pages/UpcomingMeals/UpcomingMeals";
 
 const router = createBrowserRouter([
     {
         path: "/",
         element: <Root/>,
-        // errorElement: <ErrorPage />,
+        errorElement: <ErrorPage />,
         children: [
           {
             path: "/",
@@ -31,8 +33,12 @@ const router = createBrowserRouter([
             loader: ({params})=> fetch(`http://localhost:5000/all_meals/${params.id}`)
           },
           {
-            path:'/all_meals',
-            element:<AllMeals></AllMeals>
+            path:'/meals',
+            element:<Meals></Meals>
+          },
+          {
+            path:'/upcoming',
+            element: <UpcomingMeals></UpcomingMeals>
           }
         ],
       },

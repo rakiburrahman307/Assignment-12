@@ -4,22 +4,15 @@ import './style.css'
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import useAuth from "../../Hooks/useAuth";
+import useUpcomingCarts from "../../Hooks/useUpcomingCarts";
 
 const Navbar = () => {
     const { user, logOut, toggleDarkMode, darkMode } = useAuth();
+    const [carts] = useUpcomingCarts();
     const navLink = <>
         <li><NavLink to='/' className="text-[#DDDDDD] mr-2">Home</NavLink></li>
-        <li><NavLink to='/all_meals' className="text-[#DDDDDD] mr-2">All Meals</NavLink></li>
-        <li><NavLink to='/blogs' className="text-[#DDDDDD] mr-2">Blogs</NavLink></li>
-        {user ? (
-            <>
-
-                <li><NavLink to='/add_job' className="text-[#DDDDDD] mr-2 ">Add Job</NavLink></li>
-                <li><NavLink to='/applied_job' className="text-[#DDDDDD] mr-2 ">Applied Jobs</NavLink></li>
-                <li><NavLink to='/my_job' className="text-[#DDDDDD] mr-2 ">My Job</NavLink></li>
-            </>
-        ) : null}
-
+        <li><NavLink to='/meals' className="text-[#DDDDDD] mr-2">Meals</NavLink></li>
+        <li><NavLink to='/upcoming' className="text-[#DDDDDD] mr-2">Upcoming Meals<span className="badge badge-secondary">{carts.length}</span></NavLink></li>
     </>
     return (
         <div className={`navbar ${darkMode ? 'bg-black' : 'bg-[#161616]'} sticky top-0 z-20 shadow-lg`}>
@@ -73,7 +66,7 @@ const Navbar = () => {
                         to='/login'
                         className="bg-gradient-to-r from-teal-400 to-teal-600 text-white font-semibold py-2 px-4 rounded-br-full rounded-tl-full transition duration-300 ease-in-out hover:scale-x-105"
                     >
-                        Login
+                        Join US
                     </Link>
                 )}
 

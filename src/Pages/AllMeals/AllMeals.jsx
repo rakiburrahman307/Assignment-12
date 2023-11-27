@@ -1,26 +1,26 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { useEffect, useState } from "react";
+import useAuth from "../../Hooks/useAuth";
 
 const AllMeals = () => {
-    const [itemsPerPage, setItemsPerPage] = useState(5);
-    const [currentPage, setCurrentPage] = useState(0)
-    const [carts, setCarts] = useState([])
+    const [itemsPerPage, setItemsPerPage] = useState(8);
+    const [currentPage, setCurrentPage] = useState(0);
+    const [carts, setCarts] = useState([]);
     const axiosPublic = useAxiosPublic();
+    const { setLoading } = useAuth();
 
 
     useEffect(() => {
+        setLoading(true)
         axiosPublic(`/all_meals/pagination?page=${currentPage}&size=${itemsPerPage}`)
-            .then(res => setCarts(res.data))
-    }, [currentPage, itemsPerPage, axiosPublic])
-    // Fetch all meals using React Query
-    // const { data: carts, isLoading, isError, refetch } = useQuery({
-    //     queryKey: ['all_data'],
-    //     queryFn: async () => {
-    //         const res = await axiosPublic(`/all_meals/pagination?page=${currentPage}&size=${itemsPerPage}`);
-    //         return res.data;
-    //     }
-    // });
+            .then(res => {
+                setCarts(res.data)
+                setLoading(false)
+            })
+            .catch(err => console.log(err.message));
+    }, [currentPage, itemsPerPage, axiosPublic, setLoading])
+
     const { data: totalCount = { count: 0 } } = useQuery({
         queryKey: ['count'],
         queryFn: async () => {

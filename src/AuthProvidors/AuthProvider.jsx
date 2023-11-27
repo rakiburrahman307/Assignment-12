@@ -85,6 +85,8 @@ const AuthProvider = ({ children }) => {
     logOut,
     toggleDarkMode,
     darkMode,
+    setLoading,
+
   }
   return (
     <AuthContext.Provider value={authInfo}>

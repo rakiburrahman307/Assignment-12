@@ -21,10 +21,10 @@ const MealsCategory = () => {
 
     // Fetch all meals using React Query
     const { data: carts, isLoading, isError } = useQuery({
-        queryKey:  ['all_data'],
+        queryKey: ['all_data'],
         queryFn: async () => {
             const res = await axiosPublic("/all_meals");
-            return res.data;
+            return res?.data;
         }
     });
 
@@ -33,47 +33,43 @@ const MealsCategory = () => {
     const lunch = carts ? carts.filter(cart => cart.mealType === 'lunch') : [];
     const dinner = carts ? carts.filter(cart => cart.mealType === 'dinner') : [];
 
-    const handleLike = (id) => {
- console.log(id)
-    }
     return (
         <div>
-            {isLoading && <span className="loading ml-[700px] loading-dots loading-lg"></span>}
-            {isError && <p>Error fetching data</p>}
+            {isLoading ? <span className="loading ml-[700px] loading-dots loading-lg"></span> : ""}
+            {isError ? <p>Error fetching data</p> : ''}
 
             <Tabs>
                 <TabList>
                     {
-                        types.map(type => <Tab key={type.id}>{type.type}</Tab>)
+                        types?.map(type => <Tab key={type?.id}>{type?.type}</Tab>)
                     }
                 </TabList>
+                <TabPanel>
+                    <div className='grid grid-cols-1 md:grid-cols-3 gap-5 mx-6'>
+                        {
+                            carts?.map(cart => <MealsCard key={cart?._id} carts={cart}></MealsCard>)
+                        }
+                    </div>
+                </TabPanel>
+                <TabPanel>
+                    <div className='grid grid-cols-1 md:grid-cols-3 gap-5 mx-6'>
+                        {
+                            breakFast?.map(cart => <MealsCard key={cart?._id} carts={cart}></MealsCard>)
+                        }
+                    </div>
+                </TabPanel>
+                <TabPanel>
+                    <div className='grid grid-cols-1 md:grid-cols-3 gap-5 mx-6'>
+                        {
+                            lunch?.map(cart => <MealsCard key={cart?._id} carts={cart}></MealsCard>)
+                        }
+                    </div>
+                </TabPanel>
 
                 <TabPanel>
                     <div className='grid grid-cols-1 md:grid-cols-3 gap-5 mx-6'>
                         {
-                            carts && carts.map(cart => <MealsCard key={cart._id} carts={cart} handleLike={handleLike}></MealsCard>)
-                        }
-                    </div>
-                </TabPanel>
-                <TabPanel>
-                    <div className='grid grid-cols-1 md:grid-cols-3 gap-5 mx-6'>
-                        {
-                            breakFast.map(cart => <MealsCard key={cart._id} carts={cart} handleLike={handleLike}></MealsCard>)
-                        }
-                    </div>
-                </TabPanel>
-                <TabPanel>
-                    <div className='grid grid-cols-1 md:grid-cols-3 gap-5 mx-6'>
-                        {
-                            lunch.map(cart => <MealsCard key={cart._id} carts={cart} handleLike={handleLike}></MealsCard>)
-                        }
-                    </div>
-                </TabPanel>
-
-                <TabPanel>
-                    <div className='grid grid-cols-1 md:grid-cols-3 gap-5 mx-6'>
-                        {
-                            dinner.map(cart => <MealsCard key={cart._id} carts={cart} handleLike={handleLike}></MealsCard>)
+                            dinner?.map(cart => <MealsCard key={cart?._id} carts={cart}></MealsCard>)
                         }
                     </div>
                 </TabPanel>
