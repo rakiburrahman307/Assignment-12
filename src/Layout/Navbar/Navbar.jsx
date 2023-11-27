@@ -9,7 +9,7 @@ const Navbar = () => {
     const { user, logOut, toggleDarkMode, darkMode } = useAuth();
     const navLink = <>
         <li><NavLink to='/' className="text-[#DDDDDD] mr-2">Home</NavLink></li>
-        <li><NavLink to='/all_jobs' className="text-[#DDDDDD] mr-2">All Jobs</NavLink></li>
+        <li><NavLink to='/all_meals' className="text-[#DDDDDD] mr-2">All Meals</NavLink></li>
         <li><NavLink to='/blogs' className="text-[#DDDDDD] mr-2">Blogs</NavLink></li>
         {user ? (
             <>
@@ -22,7 +22,7 @@ const Navbar = () => {
 
     </>
     return (
-        <div className={`navbar ${darkMode ? 'bg-black' : 'bg-[#007B7F]'} sticky top-0 z-20 shadow-lg`}>
+        <div className={`navbar ${darkMode ? 'bg-black' : 'bg-[#161616]'} sticky top-0 z-20 shadow-lg`}>
             <div className="navbar-start">
                 <div className="dropdown">
                     <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -62,7 +62,7 @@ const Navbar = () => {
                         >
                             {/* Profile Menu Item */}
                             <h2 className="fond-bold ml-3 my-2">{user.displayName}</h2>
-                            <li><Link to='/profile' className="mr-2">Profile</Link></li>
+                            <li><Link to='/dashboard' className="mr-2">Dashboard</Link></li>
                             <li><button className="hover:bg-red-500 hover:text-white" onClick={logOut}>Logout</button></li>
                         </ul>
                     </div>

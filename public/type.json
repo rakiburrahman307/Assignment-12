@@ -1,0 +1,18 @@
+[
+    {
+        "id": 1,
+        "type": "All Meals"
+    },
+    {
+        "id": 2,
+        "type": "Breakfast"
+    },
+    {
+        "id": 3,
+        "type": "Lunch"
+    },
+    {
+        "id": 4,
+        "type": "Dinner"
+    }
+]

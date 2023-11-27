@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import useAuth from "../../Hooks/useAuth";
 import { updateProfile } from "firebase/auth";
+import PageHelmet from "../../Hooks/pageHelmet";
 
 
 const Signup = () => {
@@ -57,6 +58,7 @@ const Signup = () => {
     return (
 
         <div className="hero min-h-screen" style={{ backgroundImage: 'url(https://i.ibb.co/p0RZHR7/vecteezy-fingerprint-identity-sensor-data-protection-system-podium-7164537.jpg)' }}>
+            <PageHelmet title='Sign Up || UniStayHub'></PageHelmet>
             <div className="hero-overlay bg-opacity-60"></div>
             <div className="hero-content text-center text-neutral-content">
                 <div className="hero min-h-screen bg-transparent">

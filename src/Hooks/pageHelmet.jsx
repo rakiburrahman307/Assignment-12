@@ -1,5 +1,6 @@
 import { Helmet } from "react-helmet";
-const pageHelmet = (title) => {
+import PropTypes from 'prop-types';
+const PageHelmet = ({title}) => {
     return (
         <Helmet>
         <meta charSet="utf-8" />
@@ -7,4 +8,7 @@ const pageHelmet = (title) => {
     </Helmet>
     );
 };
-export default pageHelmet;
+PageHelmet.propTypes = {
+    title:PropTypes.object
+}
+export default PageHelmet;
