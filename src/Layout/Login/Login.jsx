@@ -18,7 +18,6 @@ const Login = () => {
     const onSubmit = (event) => {
         const email = event.email;
         const password = event.password;
-        console.log(email, password);
         logInWithEmailAndPassword(email, password)
             .then(() => {
                 // Signed in 

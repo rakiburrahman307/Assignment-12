@@ -7,7 +7,7 @@ const useUpcomingCarts = () => {
     const { data: carts = [], isLoading, isError, refetch } = useQuery({
         queryKey: ['upcoming_data'],
         queryFn: async () => {
-            const res = await axiosPublic("/upcoming");
+            const res = await axiosPublic.get("/upcoming");
             return res.data;
         }
     });

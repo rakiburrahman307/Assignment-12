@@ -6,16 +6,13 @@ const useIsAdmin = () => {
     const axiosSecure = useAxiosSecure();
     const { user } = useAuth();
 
-    const { data } = useQuery({
+    const { data: isAdmin } = useQuery({
         queryKey: ['admin'],
         queryFn: async () => {
             const res = await axiosSecure.get(`/users/admin/${user?.email}`);
             return res.data;
         }
     });
-
-    // Ensure data exists before destructuring
-    const isAdmin = data?.isAdmin;
 
     // Return the isAdmin value directly
     return [isAdmin]

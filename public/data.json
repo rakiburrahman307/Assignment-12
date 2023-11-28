@@ -9,10 +9,7 @@
       "rating": 4.5,
       "likes": 25,
       "mealRequests": 10,
-      "reviews": [
-        "Absolutely delicious! Can't get enough of those pancakes!",
-        "Great way to start the day. Love it!"
-      ],
+      "reviews": [ ],
       "gmail": "chefemma@gmail.com",
       "price": 100
     },
@@ -26,10 +23,7 @@
       "rating": 4.2,
       "likes": 18,
       "mealRequests": 8,
-      "reviews": [
-        "Refreshing and nutritious! Perfect breakfast choice.",
-        "Loved the combination of fruits and yogurt."
-      ],
+      "reviews": [ ],
       "gmail": "chefolivia@gmail.com",
       "price": 150
     },
@@ -43,10 +37,7 @@
       "rating": 4.8,
       "likes": 30,
       "mealRequests": 12,
-      "reviews": [
-        "Perfectly cooked bacon and eggs!",
-        "A traditional breakfast done exceptionally well."
-      ],
+      "reviews": [ ],
       "gmail": "chefalex@gmail.com",
       "price": 200
     },
@@ -60,10 +51,7 @@
       "rating": 4.7,
       "likes": 28,
       "mealRequests": 12,
-      "reviews": [
-        "Healthy and delicious! Perfect for a satisfying lunch.",
-        "The lemon vinaigrette adds a refreshing touch. Loved it!"
-      ],
+      "reviews": [ ],
       "gmail": "chefmia@gmail.com",
       "price": 50
     },
@@ -77,10 +65,7 @@
       "rating": 4.6,
       "likes": 24,
       "mealRequests": 10,
-      "reviews": [
-        "Fantastic wrap! The chicken is perfectly seasoned.",
-        "Great option for a quick and tasty lunch."
-      ],
+      "reviews": [ ],
       "gmail": "chefcarlos@gmail.com",
       "price": 20
     },
@@ -94,10 +79,7 @@
       "rating": 4.4,
       "likes": 20,
       "mealRequests": 9,
-      "reviews": [
-        "Delicious and nutritious! A bowl full of goodness.",
-        "Loved the combination of flavors in this vegetarian option."
-      ],
+      "reviews": [ ],
       "gmail": "chefsofia@gmail.com",
       "price": 80
     },
@@ -111,10 +93,7 @@
       "rating": 4.8,
       "likes": 30,
       "mealRequests": 15,
-      "reviews": [
-        "A delightful dinner option! The chicken is perfectly seasoned.",
-        "Fantastic flavor combination. I look forward to ordering it again."
-      ],
+      "reviews": [ ],
       "gmail": "chefantonio@gmail.com",
       "price": 120
     },
@@ -128,10 +107,7 @@
       "rating": 4.9,
       "likes": 35,
       "mealRequests": 18,
-      "reviews": [
-        "Creamy and rich! The truffle oil adds a luxurious touch.",
-        "Best mushroom risotto I've had!"
-      ],
+      "reviews": [ ],
       "gmail": "chefdiego@gmail.com",
       "price": 130
     },
@@ -145,10 +121,7 @@
       "rating": 4.7,
       "likes": 28,
       "mealRequests": 12,
-      "reviews": [
-        "Perfectly grilled salmon! The lemon herb butter is divine.",
-        "An excellent choice for a wholesome dinner."
-      ],
+      "reviews": [ ],
       "gmail": "chefisabella@gmail.com",
       "price": 180
     }
