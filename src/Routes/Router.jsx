@@ -6,7 +6,7 @@ import Signup from "../Layout/SignUp/Signup";
 import Detail from "../Layout/Home/Detail";
 import PrivateRoute from "./PrivateRoute";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
-import Meals from "../Pages/Meals/Meals";
+import MealsAll from "../Pages/Meals/MealsAll";
 import UpcomingMeals from "../Pages/UpcomingMeals/UpcomingMeals";
 import Dashboard from "../Layout/Dashboard/Dashboard";
 import UserHome from "../Layout/Dashboard/UserHome/UserHome";
@@ -38,7 +38,8 @@ const router = createBrowserRouter([
           },
           {
             path:'/meals',
-            element:<Meals></Meals>
+            // element:<Meals></Meals>
+            element:<MealsAll/>
           },
           {
             path:'/upcoming',
