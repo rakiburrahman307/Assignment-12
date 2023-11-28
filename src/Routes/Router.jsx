@@ -8,6 +8,10 @@ import PrivateRoute from "./PrivateRoute";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import Meals from "../Pages/Meals/Meals";
 import UpcomingMeals from "../Pages/UpcomingMeals/UpcomingMeals";
+import Dashboard from "../Layout/Dashboard/Dashboard";
+import UserHome from "../Layout/Dashboard/UserHome/UserHome";
+import Payment from "../Pages/Payment/Payment";
+
 
 const router = createBrowserRouter([
     {
@@ -39,9 +43,26 @@ const router = createBrowserRouter([
           {
             path:'/upcoming',
             element: <UpcomingMeals></UpcomingMeals>
+          },
+          {
+            path:'/payment/:id',
+            element:<PrivateRoute> <Payment></Payment></PrivateRoute>,
+            loader: ({params})=> fetch(`http://localhost:5000/plans/${params.id}`)
           }
+          
         ],
       },
+      {
+        path:'dashboard',
+        element:<PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
+        errorElement: <ErrorPage />,
+        children:[
+          {
+            path:'userHome',
+            element:<UserHome></UserHome>
+          }
+        ]
+      }
   ]);
 
   export default router;

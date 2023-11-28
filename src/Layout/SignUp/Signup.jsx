@@ -4,10 +4,13 @@ import { toast } from "react-toastify";
 import useAuth from "../../Hooks/useAuth";
 import { updateProfile } from "firebase/auth";
 import PageHelmet from "../../Hooks/pageHelmet";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
+
 
 
 const Signup = () => {
     const { createUser } = useAuth();
+    const axiosPublic = useAxiosPublic();
     const navigate = useNavigate();
     const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/;
     const {
@@ -39,8 +42,21 @@ const Signup = () => {
                         photoURL: photoUrl
                     })
                         .then(() => {
-                            toast.success("Create user successfully")
-                            navigate("/")
+                            const userInfo = {
+                                name: name,
+                                email: email,
+                                photoURL: photoUrl
+                            }
+                            axiosPublic.post('/users', userInfo)
+                            .then(res =>{
+                                if (res.data.insertedId) {
+                                    toast.success("Create user successfully")
+                                    navigate("/")
+                                    
+                                }
+                            })
+                            .catch(err =>console.log(err.message));
+                        
 
                         })
                         .catch(err => {

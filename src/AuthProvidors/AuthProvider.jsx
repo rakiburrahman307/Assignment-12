@@ -2,8 +2,8 @@ import { createContext, useEffect, useState } from "react";
 import PropTypes from 'prop-types';
 import auth from "./FireBase/FirebaseConfig";
 import { GoogleAuthProvider, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
+import useAxiosSecure from "../Hooks/useAxiosSecure";
 
-// import axios from "axios";
 
 
 export const AuthContext = createContext();
@@ -12,6 +12,7 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [darkMode, setDarkMode] = useState(false);
+  const axiosSecure = useAxiosSecure();
 
   // Dark Mode Implement 
   const toggleDarkMode = () => {
@@ -48,33 +49,33 @@ const AuthProvider = ({ children }) => {
   // User State Change 
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
-      // const userEmail = currentUser?.email || user?.email;
-      // const userLoggedIn = { email: userEmail };
+      const userEmail = currentUser?.email || user?.email;
+      const userLoggedIn = { email: userEmail };
 
       if (currentUser) {
         setUser(currentUser);
-        // axios.post('https://localhost:5000/jwt', userLoggedIn, { withCredentials: true })
-        //   .then((res) => {
-        //     console.log(res.data);
-        //   })
-        //   .catch((err) => {
-        //     console.error(err.message);
-        //   });
+        axiosSecure.post('/jwt', userLoggedIn)
+          .then((res) => {
+            console.log(res.data);
+          })
+          .catch((err) => {
+            console.error(err.message);
+          });
       } else {
-        // axios.post('https://assignment-11-server-pi-rouge.vercel.app/logout', userLoggedIn, { withCredentials: true })
-        //   .then((res) => {
-        //     console.log(res.data);
-        //   })
-        //   .catch((err) => {
-        //     console.error(err.message);
-        //   });
+        axiosSecure.post('/logout', userLoggedIn)
+          .then((res) => {
+            console.log(res.data);
+          })
+          .catch((err) => {
+            console.error(err.message);
+          });
         setUser(null);
       }
       setLoading(false);
     });
 
     return () => unSubscribe();
-  }, [user?.email]);
+  }, [user?.email, axiosSecure]);
 
   const authInfo = {
     user,
@@ -90,7 +91,11 @@ const AuthProvider = ({ children }) => {
   }
   return (
     <AuthContext.Provider value={authInfo}>
-      {children}
+      {loading ? (
+        <span className="loading ml-[700px] loading-dots loading-lg"></span>
+      ) : (
+        children
+      )}
     </AuthContext.Provider>
   );
 };
