@@ -23,7 +23,7 @@
       "rating": 4.2,
       "likes": 18,
       "mealRequests": 8,
-      "reviews": [ ],
+      "reviews": [  {"name": "rakib", "email": "rakib@gmail.com"}],
       "gmail": "chefolivia@gmail.com",
       "price": 150
     },
