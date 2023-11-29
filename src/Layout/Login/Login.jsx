@@ -2,12 +2,14 @@ import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import { toast } from "react-toastify";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
 
 
 const Login = () => {
     const { logInWithGoogle, logInWithEmailAndPassword } = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
+    const axiosPublic = useAxiosPublic();
     const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/;
     const {
         register,
@@ -34,9 +36,22 @@ const Login = () => {
 
     const handleLogInWithGoogle = () => {
         logInWithGoogle()
-            .then(() => {
-                toast.success('Sign in successful');
-                navigate(location?.state ? location.state : '/');
+            .then((res) => {
+                const userInfo = {
+                    name: res?.user?.displayName,
+                    email: res?.user?.email,
+                    photoURL: res?.user?.photoURL
+                }
+                axiosPublic.patch('/users', userInfo)
+                .then(res =>{
+                    if (res.data.insertedId) {
+                        toast.success('Sign in successful');
+                        navigate(location?.state ? location.state : '/');
+                        
+                    }
+                })
+                .catch(err =>console.log(err.message));
+               
 
             })
             .catch((err) => {

@@ -16,10 +16,10 @@ const Detail = () => {
     const customerName = user?.displayName;
     const customerEmail = user?.email;
     const status = 'pending';
-    const { _id, mealType, mealImage, adminName, rating, likes, price, mealDescription, ingredients, postTime } = cardData;
+    const { _id, mealType, mealImage, adminName, rating, likes, price, mealDescription, ingredients, postTime, reviews:review } = cardData;
     const [liked, setLiked] = useState(false);
     const [likeCount, setLikeCount] = useState(likes);
-    const mealInfo = { customerName, customerEmail, mealType, mealImage, adminName, rating, likes, price, mealDescription, ingredients, postTime, status }
+    const mealInfo = { customerName, customerEmail, mealType, mealImage, adminName, rating, likes, price, mealDescription, ingredients, postTime, status, review }
     const { data: planConfirm = [] } = useQuery({
         queryKey: ['allData'],
         queryFn: async () => {

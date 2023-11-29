@@ -82,7 +82,7 @@ const MealList = () => {
 
                         {
                             meals.map((meal) => (
-                                <tr key={meals._id}>
+                                <tr key={meal._id}>
 
                                     <td>
                                         <div className="flex items-center gap-3">

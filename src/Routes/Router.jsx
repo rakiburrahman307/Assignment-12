@@ -11,6 +11,8 @@ import UpcomingMeals from "../Pages/UpcomingMeals/UpcomingMeals";
 import Dashboard from "../Layout/Dashboard/Dashboard";
 import UserHome from "../Layout/Dashboard/UserHome/UserHome";
 import Payment from "../Pages/Payment/Payment";
+import RequestMeals from "../Layout/Dashboard/UserHome/RequestMeals";
+import MyComment from "../Layout/Dashboard/UserHome/MyReviews";
 
 
 const router = createBrowserRouter([
@@ -61,6 +63,14 @@ const router = createBrowserRouter([
           {
             path:'userHome',
             element:<UserHome></UserHome>
+          },
+          {
+            path:'/dashboard/request_meal',
+            element: <RequestMeals></RequestMeals>
+          },
+          {
+            path:'/dashboard/my_comment',
+            element: <MyComment></MyComment>
           }
         ]
       }

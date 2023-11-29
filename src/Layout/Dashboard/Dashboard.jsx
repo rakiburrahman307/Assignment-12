@@ -46,13 +46,13 @@ const Dashboard = () => {
                                 </Link>
                             </li>
                             <li>
-                                <Link>
+                                <Link to='/dashboard/request_meal'>
                                 <CiSquareQuestion />
                                     Requested Meals
                                 </Link>
                             </li>
                             <li>
-                                <Link>
+                                <Link to='/dashboard/my_comment'>
                                 <VscOpenPreview />
                                     My Reviews
                                 </Link>

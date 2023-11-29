@@ -47,7 +47,7 @@ const Signup = () => {
                                 email: email,
                                 photoURL: photoUrl
                             }
-                            axiosPublic.post('/users', userInfo)
+                            axiosPublic.patch('/users', userInfo)
                             .then(res =>{
                                 if (res.data.insertedId) {
                                     toast.success("Create user successfully")

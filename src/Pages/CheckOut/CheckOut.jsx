@@ -70,13 +70,14 @@ const CheckOut = ({ plan }) => {
                 const info = {
                     name: user?.displayName,
                     email: user?.email,
+                    photoURL: user?.photoURL,
                     package: name,
                     transactionID: paymentIntent?.id,
                     price: price
                 }
                 axiosSecure.post('/confirmPlans',info)
                 .then(() =>{
-                    setTransactionId(paymentIntent.id);
+                    setTransactionId(paymentIntent?.id);
                     toast.success('Payment Success');
                     navigate(location?.state ? location.state : '/');
                     
