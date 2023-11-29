@@ -1,20 +1,23 @@
-import { useState } from 'react';
-import { useQuery, useMutation, QueryClient } from '@tanstack/react-query';
+
 import { toast } from 'react-toastify';
 import useAxiosSecure from '../../../../Hooks/useAxiosSecure';
 import Swal from 'sweetalert2';
+import { useQuery } from '@tanstack/react-query';
+import { useState } from 'react';
 
 const ServeMeals = () => {
+    const [searchQuery, setSearchQuery] = useState('');
     const axiosSecure = useAxiosSecure();
 
-    // Fetch requested meals data
-    const { data: requestedMeals = [] , refetch } = useQuery({
-        queryKey: ['requestedMeals'],
+    const { data: requestedMeals = [], refetch } = useQuery({
+        queryKey: ['requestedMeals', searchQuery],
         queryFn: async () => {
-            const res = await axiosSecure.get('/req_meal');
-            return res.data;
+          const res = await axiosSecure.get('/requested_meals', {
+            params: { username: searchQuery, email: searchQuery },
+          });
+          return res.data;
         },
-    });
+      });
 
       // Function to handle serving a meal
       const handleServeMeal = (mealId, status) => {
@@ -42,17 +45,7 @@ const ServeMeals = () => {
         }
       };
 
-      // State for search query
-    //   const [searchQuery, setSearchQuery] = useState('');
-
-    //   // Function to filter meals based on search query
-    //   const filteredMeals = requestedMeals.filter(
-    //     (meal) =>
-    //       meal.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    //       meal.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    //       meal.name.toLowerCase().includes(searchQuery.toLowerCase())
-    //   );
-
+      
     
     return (
         <div>
@@ -85,12 +78,12 @@ const ServeMeals = () => {
                             </th>
                             <th>
                                      {/* Search bar */}
-            <input
-            className="input input-bordered input-xs w-28"
+                                     <input
+        className="input input-bordered input-xs w-28"
         type="text"
-        placeholder="Search by title, email"
-        // value={searchQuery}
-        // onChange={(e) => setSearchQuery(e.target.value)}
+        placeholder="Search by username or email"
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
       />
                             </th>
                         </tr>

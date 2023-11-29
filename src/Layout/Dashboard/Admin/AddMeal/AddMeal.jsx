@@ -1,11 +1,10 @@
 
 import { useForm } from 'react-hook-form';
 import useAxiosSecure from '../../../../Hooks/useAxiosSecure';
-import { toast } from 'react-toastify';
 import Swal from 'sweetalert2';
 const AddMeal = () => {
   const axiosSecure = useAxiosSecure();
-  const { register, handleSubmit, reset } = useForm();
+  const { register, handleSubmit } = useForm();
   const onSubmit = (data) => {
     const mealType = data.mealType;
     const mealTitle = data.mealTitle;
