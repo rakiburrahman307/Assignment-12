@@ -1,86 +1,145 @@
 
 import { useForm } from 'react-hook-form';
-import axios from 'axios';
+import useAxiosSecure from '../../../../Hooks/useAxiosSecure';
 import { toast } from 'react-toastify';
-
-const AddMealForm = () => {
+import Swal from 'sweetalert2';
+const AddMeal = () => {
+  const axiosSecure = useAxiosSecure();
   const { register, handleSubmit, reset } = useForm();
-
-  const onSubmit = async (data) => {
-    try {
-      // Send data to the database
-      const response = await axios.post('/add_meal', data);
-
-      // Show success toast
-      toast.success('Meal added successfully!');
-
-      // Clear the form
-      reset();
-    } catch (error) {
-      console.error('Error adding meal:', error);
-
-      // Show error toast
-      toast.error('Error adding meal. Please try again.');
-    }
+  const onSubmit = (data) => {
+    const mealType = data.mealType;
+    const mealTitle = data.mealTitle;
+    const mealImage = data.mealImage;
+    const ingredients = data.ingredients;
+    const mealDescription = data.mealDescription;
+    const price = data.price;
+    const rating = data.rating;
+    const adminName = data.adminName;
+    const gmail = data.adminEmail;
+    const postTime = new Date().toISOString();
+    const likes = 0;
+    const reviews = [];
+    const mealInfo = { mealType, mealTitle, mealImage, ingredients, mealDescription, price, rating, adminName, gmail, postTime, likes, reviews }
+    axiosSecure.post('/add_meal',mealInfo)
+    .then(res=>{
+      if (res.data.insertedId) {
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Meal Added",
+          showConfirmButton: false,
+          timer: 1500
+        });
+      }
+    })
+    .catch(err => console.log(err.message));
   };
 
-  const onAddToUpcoming = async (data) => {
-    try {
-      // Send data to the database and upcoming collection
-      await axios.post('/add_meal', data);
-      await axios.post('/add_to_upcoming', data);
 
-      // Show success toast
-      toast.success('Meal added to upcoming successfully!');
-
-      // Clear the form
-      reset();
-    } catch (error) {
-      console.error('Error adding meal to upcoming:', error);
-
-      // Show error toast
-      toast.error('Error adding meal to upcoming. Please try again.');
-    }
+  const onAddToUpcoming = (data) => {
+    const mealType = data.mealType;
+    const mealTitle = data.mealTitle;
+    const mealImage = data.mealImage;
+    const ingredients = data.ingredients;
+    const mealDescription = data.mealDescription;
+    const price = data.price;
+    const rating = data.rating;
+    const adminName = data.adminName;
+    const gmail = data.adminEmail;
+    const postTime = new Date().toISOString();
+    const likes = 0;
+    const reviews = [];
+    const mealInfo = { mealType, mealTitle, mealImage, ingredients, mealDescription, price, rating, adminName, gmail, postTime, likes, reviews }
+    axiosSecure.post('/add_meal_upcoming',mealInfo)
+    .then(res=>{
+      if (res.data.insertedId) {
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Meal Added Upcoming",
+          showConfirmButton: false,
+          timer: 1500
+        });
+      }
+    })
+    .catch(err => console.log(err.message));
   };
+ 
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <label htmlFor="mealTitle">Meal Title</label>
-      <input {...register('mealTitle')} type="text" id="mealTitle" required />
+    <div className="card shrink-0 w-full shadow-2xl bg-base-100">
+      <form className="card-body" onSubmit={handleSubmit(onSubmit)}>
 
-      <label htmlFor="mealType">Meal Type</label>
-      <input {...register('mealType')} type="text" id="mealType" required />
+        <div className="form-control">
+          <label htmlFor="mealTitle" className="label">
+            <span className="label-text">Meal Title</span>
+          </label>
+          <input className="input input-bordered w-full " {...register('mealTitle')} type="text" id="mealTitle" required />
+        </div>
 
-      <label htmlFor="mealImage">Meal Image URL</label>
-      <input {...register('mealImage')} type="text" id="mealImage" required />
+        <div className="form-control">
+          <label htmlFor="mealType" className="label">
+            <span className="label-text">Meal Type</span>
+          </label>
+          <input className="input input-bordered w-full " {...register('mealType')} type="text" id="mealType" required />
+        </div>
+        <div className="form-control">
+          <label htmlFor="mealImage" className="label">
+            <span className="label-text">Meal Image URL</span>
+          </label>
+          <input className="input input-bordered w-full" {...register('mealImage')} type="text" id="mealImage" required />
+        </div>
 
-      <label htmlFor="ingredients">Ingredients</label>
-      <textarea {...register('ingredients')} id="ingredients" required />
+        <div className="form-control">
+          <label htmlFor="ingredients" className="label">
+            <span className="label-text">Ingredients</span>
+          </label>
+          <textarea className="textarea textarea-bordered textarea-xs w-full"  {...register('ingredients')} id="ingredients" required />
+        </div>
 
-      <label htmlFor="mealDescription">Meal Description</label>
-      <textarea {...register('mealDescription')} id="mealDescription" required />
 
-      <label htmlFor="price">Price</label>
-      <input {...register('price')} type="number" id="price" required />
+        <div className="form-control">
+          <label htmlFor="mealDescription" className="label">
+            <span className="label-text">Meal Description</span>
+          </label>
+          <textarea className="textarea textarea-bordered textarea-xs w-full "  {...register('mealDescription')} id="mealDescription" required />
+        </div>
 
-      <label htmlFor="rating">Rating</label>
-      <input {...register('rating')} type="number" id="rating" step="0.1" required />
+        <div className="form-control">
+          <label htmlFor="price" className="label">
+            <span className="label-text">Price</span>
+          </label>
+          <input className="input input-bordered w-full " {...register('price')} type="number" id="price" required />
+        </div>
 
-      <label htmlFor="postTime">Post Time</label>
-      <input {...register('postTime')} type="text" id="postTime" required />
+        <div className="form-control">
+          <label htmlFor="rating" className="label">
+            <span className="label-text">Rating</span>
+          </label>
+          <input className="input input-bordered w-full" {...register('rating')} type="number" id="rating" step="0.1" required />
+        </div>
 
-      <label htmlFor="adminName">Admin/Distributor Name</label>
-      <input {...register('adminName')} type="text" id="adminName" required />
 
-      <label htmlFor="adminEmail">Admin/Distributor Email</label>
-      <input {...register('adminEmail')} type="email" id="adminEmail" required />
+        <div className="form-control">
+          <label htmlFor="adminName" className="label">
+            <span className="label-text">Admin/Distributor Name</span>
+          </label>
+          <input className="input input-bordered w-full" {...register('adminName')} type="text" id="adminName" required />
+        </div>
+        <div className="form-control">
+          <label htmlFor="adminEmail" className="label">
+            <span className="label-text">Admin/Distributor Email</span>
+          </label>
+          <input className="input input-bordered w-full" {...register('adminEmail')} type="email" id="adminEmail" required />
+        </div>
 
-      <button type="submit">Add Meal</button>
-      <button type="button" onClick={handleSubmit(onAddToUpcoming)}>
-        Add to Upcoming
-      </button>
-    </form>
+        <button className="btn btn-sm">Add Meal</button>
+        <button className="btn btn-sm" onClick={handleSubmit(onAddToUpcoming)}>
+          Add to Upcoming
+        </button>
+      </form>
+    </div>
   );
 };
 
-export default AddMealForm;
+export default AddMeal;

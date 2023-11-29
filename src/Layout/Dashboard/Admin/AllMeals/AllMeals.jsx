@@ -1,7 +1,8 @@
-import { useQuery } from "@tanstack/react-query";
-import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { useEffect, useState } from "react";
-import useAuth from "../../Hooks/useAuth";
+import useAxiosPublic from "../../../../Hooks/useAxiosPublic";
+import useAuth from "../../../../Hooks/useAuth";
+import { useQuery } from "@tanstack/react-query";
+
 
 const AllMeals = () => {
     const [itemsPerPage, setItemsPerPage] = useState(8);
@@ -12,14 +13,19 @@ const AllMeals = () => {
 
 
     useEffect(() => {
-        setLoading(true)
-        axiosPublic(`/all_meals/pagination?page=${currentPage}&size=${itemsPerPage}`)
-            .then(res => {
-                setCarts(res.data)
-                setLoading(false)
+
+        axiosPublic
+            .get(`/all_meals/pagination?page=${currentPage}&size=${itemsPerPage}`)
+            .then((res) => {
+                setCarts(res.data);
+
             })
-            .catch(err => console.log(err.message));
-    }, [currentPage, itemsPerPage, axiosPublic, setLoading])
+            .catch((error) => {
+                console.error("Error fetching meals:", error);
+
+            });
+    }, [currentPage, itemsPerPage, axiosPublic, setLoading]);
+    
 
     const { data: totalCount = { count: 0 } } = useQuery({
         queryKey: ['count'],
@@ -66,6 +72,9 @@ const AllMeals = () => {
                                 Meal Type
                             </th>
                             <th scope="col" className="px-6 py-3">
+                                Meal Title
+                            </th>
+                            <th scope="col" className="px-6 py-3">
                                 Distributor Name
                             </th>
                             <th scope="col" className="px-6 py-3">
@@ -94,6 +103,9 @@ const AllMeals = () => {
                                 </td>
                                 <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                     {cart?.mealType}
+                                </th>
+                                <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    {cart?.mealTitle}
                                 </th>
                                 <td className="px-6 py-4">
                                     {cart?.adminName}
