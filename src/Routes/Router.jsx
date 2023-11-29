@@ -46,7 +46,7 @@ const router = createBrowserRouter([
       {
         path: '/detail/:id',
         element: <PrivateRoute><Detail></Detail></PrivateRoute>,
-        loader: ({ params }) => fetch(`http://localhost:5000/all_meals/${params.id}`)
+        loader: ({ params }) => fetch(`https://assignment-12-server-beta-roan.vercel.app/all_meals/${params.id}`)
       },
       {
         path: '/meals',
@@ -59,7 +59,7 @@ const router = createBrowserRouter([
       {
         path: '/payment/:id',
         element: <PrivateRoute> <Payment></Payment></PrivateRoute>,
-        loader: ({ params }) => fetch(`http://localhost:5000/plans/${params.id}`)
+        loader: ({ params }) => fetch(`https://assignment-12-server-beta-roan.vercel.app/plans/${params.id}`)
       }
 
     ],
