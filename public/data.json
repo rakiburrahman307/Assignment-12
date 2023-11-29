@@ -9,7 +9,7 @@
       "rating": 4.5,
       "likes": 25,
       "mealRequests": 10,
-      "reviews": [ ],
+      "reviews": [  {"name": "rakib", "email": "rakib@gmail.com"}],
       "gmail": "chefemma@gmail.com",
       "price": 100
     },

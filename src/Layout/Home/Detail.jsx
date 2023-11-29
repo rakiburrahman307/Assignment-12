@@ -67,8 +67,13 @@ const Detail = () => {
         } else {
             axiosSecure.post(`/all_meals_review/${_id}`, comment)
                 .then(() => {
-                    toast.success('Comment Added successfully');
-                    refetch();
+                    axiosSecure.post(`/reviewsCollections`, comment)
+                    .then(() => {
+                        toast.success('Comment Added successfully');
+                        refetch();
+                    })
+                    .catch(err => console.error(err));
+                   
                 })
                 .catch(err => {
                     console.error(err);
