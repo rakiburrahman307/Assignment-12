@@ -20,6 +20,7 @@ import ServeMeals from "../Layout/Dashboard/Admin/ServeMeals/ServeMeals";
 import AllMeals from "../Layout/Dashboard/Admin/AllMeals/AllMeals";
 import AddMeal from "../Layout/Dashboard/Admin/AddMeal/AddMeal";
 import AllReviews from "../Layout/Dashboard/Admin/AllReviews/AllReviews";
+import Upcoming from "../Layout/Dashboard/Admin/Upcomingmeals/Upcoming";
 
 
 
@@ -104,6 +105,10 @@ const router = createBrowserRouter([
       {
         path: '/dashboard/addMeals',
         element: <AdminRoute><AddMeal></AddMeal></AdminRoute>
+      },
+      {
+        path: '/dashboard/upcoming',
+        element: <AdminRoute><Upcoming></Upcoming></AdminRoute>
       }
 
     ]

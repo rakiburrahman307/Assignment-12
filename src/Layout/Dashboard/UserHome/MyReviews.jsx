@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 import { toast } from 'react-toastify';
 import { useEffect, useState } from 'react';
 import Modal from 'react-modal';
+import PageHelmet from '../../../Hooks/pageHelmet';
 
 const MyReviews = () => {
   const { user } = useAuth();
@@ -96,6 +97,7 @@ const MyReviews = () => {
 
   return (
     <div>
+      <PageHelmet title='My Review'></PageHelmet>
       <div className="py-10">
         <h2 className="text-3xl font-bold text-center py-5">Customer Comment</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mx-5">

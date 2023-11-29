@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../../Hooks/useAuth";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { BiSolidLike } from "react-icons/bi";
+import PageHelmet from "../../../Hooks/pageHelmet";
 
 const RequestMeals = () => {
     const {user} = useAuth();
@@ -15,6 +16,7 @@ const RequestMeals = () => {
     })
     return (
         <div>
+            <PageHelmet title='Request Meals'></PageHelmet>
              <div className="overflow-x-auto">
                 <table className="table">
                     {/* head */}

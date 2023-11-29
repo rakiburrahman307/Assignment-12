@@ -2,6 +2,7 @@
 import { useForm } from 'react-hook-form';
 import useAxiosSecure from '../../../../Hooks/useAxiosSecure';
 import Swal from 'sweetalert2';
+import PageHelmet from '../../../../Hooks/pageHelmet';
 const AddMeal = () => {
   const axiosSecure = useAxiosSecure();
   const { register, handleSubmit } = useForm();
@@ -68,7 +69,7 @@ const AddMeal = () => {
   return (
     <div className="card shrink-0 w-full shadow-2xl bg-base-100">
       <form className="card-body" onSubmit={handleSubmit(onSubmit)}>
-
+    <PageHelmet title='Add Meals'></PageHelmet>
         <div className="form-control">
           <label htmlFor="mealTitle" className="label">
             <span className="label-text">Meal Title</span>

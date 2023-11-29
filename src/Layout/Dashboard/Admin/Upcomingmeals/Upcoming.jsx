@@ -1,59 +1,75 @@
+import { useState } from "react";
+import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
+import { useQuery } from "@tanstack/react-query";
+import Swal from "sweetalert2";
+import { toast } from "react-toastify";
+import PageHelmet from "../../../../Hooks/pageHelmet";
 
-import { toast } from 'react-toastify';
-import useAxiosSecure from '../../../../Hooks/useAxiosSecure';
-import Swal from 'sweetalert2';
-import { useQuery } from '@tanstack/react-query';
-import { useState } from 'react';
-import PageHelmet from '../../../../Hooks/pageHelmet';
 
-const ServeMeals = () => {
+const Upcoming = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const axiosSecure = useAxiosSecure();
 
     const { data: requestedMeals = [], refetch } = useQuery({
         queryKey: ['requestedMeals', searchQuery],
         queryFn: async () => {
-          const res = await axiosSecure.get('/requested_meals', {
-            params: { username: searchQuery, email: searchQuery },
-          });
-          return res.data;
+            const res = await axiosSecure.get('/upcoming_meals', {
+                params: { username: searchQuery, email: searchQuery },
+            });
+            return res.data;
         },
-      });
+    });
 
-      // Function to handle serving a meal
-      const handleServeMeal = (mealId, status) => {
-        if (status === 'delivered') {
-          toast.warning('Meal is already served');
+
+    const handleServeMeal = (meal) => {
+        const mealType = meal.mealType;
+        const mealTitle = meal.mealTitle;
+        const mealImage = meal.mealImage;
+        const ingredients = meal.ingredients;
+        const mealDescription = meal.mealDescription;
+        const price = meal.price;
+        const rating = meal.rating;
+        const adminName = meal.adminName;
+        const gmail = meal.gmail;
+        const postTime = new Date().toISOString();
+        const likes = meal.likes;
+        const reviews = [];
+        const mealInfo = { mealType, mealTitle, mealImage, ingredients, mealDescription, price, rating, adminName, gmail, postTime, likes, reviews }
+
+        if (meal?.likes >= 10) {
+
+            axiosSecure.post(`/publishMeal`, mealInfo)
+                .then(res => {
+                    if (res.data.insertedId) {
+                        Swal.fire({
+                            position: "top-end",
+                            icon: "success",
+                            title: "Meal Publish",
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                        refetch();
+                    }
+                })
+                .catch(err => console.log(err.message));
+
         } else {
-            const info = {
-                status: 'delivered'
-            };
-
-          axiosSecure.patch(`/req_meal_status/${mealId}`, info)
-          .then(res=>{
-            if(res.data.modifiedCount){
-                Swal.fire({
-                    position: "top-end",
-                    icon: "success",
-                    title: "Meal Serve",
-                    showConfirmButton: false,
-                    timer: 1500
-                  });
-                  refetch();
-            }
-          })
-          .catch(err=> console.log(err.message));
+            Swal.fire({
+                position: "top-end",
+                icon: "warning",
+                title: 'At lest 10 Likes to Publish',
+                showConfirmButton: false,
+                timer: 1500
+            });
+            toast.warning()
         }
-      };
+    };
 
-      
-    
     return (
         <div>
-       
 
+            <PageHelmet title='Upcoming Meals'></PageHelmet>
             <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-            <PageHelmet title='Serve Meals'></PageHelmet>
                 <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                     <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
@@ -69,24 +85,25 @@ const ServeMeals = () => {
                             <th scope="col" className="px-6 py-3">
                                 Customer Name
                             </th>
+
                             <th scope="col" className="px-6 py-3">
-                                Customer Email
+                                Email
                             </th>
                             <th scope="col" className="px-6 py-3">
-                                Status
+                                Likes
                             </th>
                             <th scope="col" className="px-6 py-3">
                                 Action
                             </th>
                             <th>
-                                     {/* Search bar */}
-                                     <input
-        className="input input-bordered input-xs w-28"
-        type="text"
-        placeholder="Search by username or email"
-        value={searchQuery}
-        onChange={(e) => setSearchQuery(e.target.value)}
-      />
+                                {/* Search bar */}
+                                <input
+                                    className="input input-bordered input-xs w-28"
+                                    type="text"
+                                    placeholder="Search by username or email"
+                                    value={searchQuery}
+                                    onChange={(e) => setSearchQuery(e.target.value)}
+                                />
                             </th>
                         </tr>
                     </thead>
@@ -109,18 +126,19 @@ const ServeMeals = () => {
                                 {meal?.mealTitle}
                             </th>
                             <td className="px-6 py-4">
-                                {meal?.customerName}
+                                {meal?.adminName}
                             </td>
                             <td className="px-6 py-4">
-                                {meal?.customerEmail}
+                                {meal?.gmail}
                             </td>
                             <td className="px-6 py-4">
-                                {meal?.status}
+                                {meal?.likes}
                             </td>
+
                             <td className="px-6 py-4">
-                                {
-                                    meal.status==='delivered' ? <span className='text-green-500'>Done</span> : <button onClick={()=>handleServeMeal(meal._id, meal.status)} className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Serve</button>
-                                }
+
+                                <button onClick={() => handleServeMeal(meal)} className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Publish</button>
+
                             </td>
                         </tr>)
                     }
@@ -132,4 +150,5 @@ const ServeMeals = () => {
     );
 };
 
-export default ServeMeals;
+export default Upcoming;
+

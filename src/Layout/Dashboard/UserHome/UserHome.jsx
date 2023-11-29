@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import useAuth from "../../../Hooks/useAuth";
+import PageHelmet from "../../../Hooks/pageHelmet";
 
 const UserHome = () => {
     const axiosSecure = useAxiosSecure();
@@ -14,6 +15,7 @@ const UserHome = () => {
     })
     return (
         <div className="">
+            <PageHelmet title='User Home'></PageHelmet>
             <div className="w-full max-w-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mx-auto">
 
                 <div className="flex flex-col items-center pb-10">
