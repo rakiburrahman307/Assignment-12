@@ -42,10 +42,10 @@ const AllReviews = () => {
     }
     return (
         <div>
-                 <h2 className='text-center text-3xl font-bold'>All Reviews</h2>
+            <h2 className='text-center text-3xl font-bold'>All Reviews</h2>
             <PageHelmet title='Review py-5'></PageHelmet>
             <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-                <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                <table data-aos="fade-up" className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                     <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
                             <th scope="col" className="px-6 py-3">
@@ -72,7 +72,7 @@ const AllReviews = () => {
                     <tbody>
 
                         {
-                            totalData?.map(cart => <tr key={cart._id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                            totalData?.map(cart => <tr data-aos="fade-up" key={cart._id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                 <td>
                                     <div className="flex items-center gap-3">
                                         <div className="avatar">

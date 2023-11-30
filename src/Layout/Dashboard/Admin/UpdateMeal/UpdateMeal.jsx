@@ -5,10 +5,10 @@ import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
 import PageHelmet from '../../../../Hooks/pageHelmet';
 const UpdateMeal = () => {
-    const mealData = useLoaderData();
-    const {_id,mealType, mealTitle, mealImage, ingredients, mealDescription, price, rating, adminName, gmail } = mealData;
+  const mealData = useLoaderData();
+  const { _id, mealType, mealTitle, mealImage, ingredients, mealDescription, price, rating, adminName, gmail } = mealData;
   const axiosSecure = useAxiosSecure();
-  const { register, handleSubmit,  formState: { isSubmitting } } = useForm();
+  const { register, handleSubmit, formState: { isSubmitting } } = useForm();
   const onSubmit = (data) => {
     const mealType = data.mealType;
     const mealTitle = data.mealTitle;
@@ -21,29 +21,29 @@ const UpdateMeal = () => {
     const gmail = data.adminEmail;
     const postTime = new Date().toISOString();
 
-    const mealInfo = { mealType, mealTitle, mealImage, ingredients, mealDescription, price, rating, adminName, gmail, postTime}
-    axiosSecure.patch(`/update_meal/${_id}`,mealInfo)
-    .then(res=>{
-      if (res.data.modifiedCount > 0) {
-        Swal.fire({
-          position: "top-end",
-          icon: "success",
-          title: "Meal Updated successfully",
-          showConfirmButton: false,
-          timer: 1500
-        });
-      }
-    })
-    .catch(err => console.log(err.message));
+    const mealInfo = { mealType, mealTitle, mealImage, ingredients, mealDescription, price, rating, adminName, gmail, postTime }
+    axiosSecure.patch(`/update_meal/${_id}`, mealInfo)
+      .then(res => {
+        if (res.data.modifiedCount > 0) {
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Meal Updated successfully",
+            showConfirmButton: false,
+            timer: 1500
+          });
+        }
+      })
+      .catch(err => console.log(err.message));
   };
 
 
 
   return (
     <div className="card shrink-0 w-full shadow-2xl bg-base-100">
-        <h2 className='text-center text-3xl py-5 font-bold'>Update Meal</h2>
-      <form className="card-body" onSubmit={handleSubmit(onSubmit)}>
-    <PageHelmet title='Update Meal'></PageHelmet>
+      <h2 className='text-center text-3xl py-5 font-bold'>Update Meal</h2>
+      <form data-aos="fade-up" className="card-body" onSubmit={handleSubmit(onSubmit)}>
+        <PageHelmet title='Update Meal'></PageHelmet>
         <div className="form-control">
           <label htmlFor="mealTitle" className="label">
             <span className="label-text">Meal Title</span>

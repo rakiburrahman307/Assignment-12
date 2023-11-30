@@ -20,19 +20,19 @@ const AddMeal = () => {
     const likes = 0;
     const reviews = [];
     const mealInfo = { mealType, mealTitle, mealImage, ingredients, mealDescription, price, rating, adminName, gmail, postTime, likes, reviews }
-    axiosSecure.post('/add_meal',mealInfo)
-    .then(res=>{
-      if (res.data.insertedId) {
-        Swal.fire({
-          position: "top-end",
-          icon: "success",
-          title: "Meal Added",
-          showConfirmButton: false,
-          timer: 1500
-        });
-      }
-    })
-    .catch(err => console.log(err.message));
+    axiosSecure.post('/add_meal', mealInfo)
+      .then(res => {
+        if (res.data.insertedId) {
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Meal Added",
+            showConfirmButton: false,
+            timer: 1500
+          });
+        }
+      })
+      .catch(err => console.log(err.message));
   };
 
 
@@ -50,27 +50,27 @@ const AddMeal = () => {
     const likes = 0;
     const reviews = [];
     const mealInfo = { mealType, mealTitle, mealImage, ingredients, mealDescription, price, rating, adminName, gmail, postTime, likes, reviews }
-    axiosSecure.post('/add_meal_upcoming',mealInfo)
-    .then(res=>{
-      if (res.data.insertedId) {
-        Swal.fire({
-          position: "top-end",
-          icon: "success",
-          title: "Meal Added Upcoming",
-          showConfirmButton: false,
-          timer: 1500
-        });
-      }
-    })
-    .catch(err => console.log(err.message));
+    axiosSecure.post('/add_meal_upcoming', mealInfo)
+      .then(res => {
+        if (res.data.insertedId) {
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Meal Added Upcoming",
+            showConfirmButton: false,
+            timer: 1500
+          });
+        }
+      })
+      .catch(err => console.log(err.message));
   };
- 
+
 
   return (
     <div className="card shrink-0 w-full shadow-2xl bg-base-100">
-           <h2 className='text-center text-3xl font-bold'>Add Meal</h2>
-      <form className="card-body" onSubmit={handleSubmit(onSubmit)}>
-    <PageHelmet title='Add Meals'></PageHelmet>
+      <h2 className='text-center text-3xl font-bold'>Add Meal</h2>
+      <form data-aos="fade-up" className="card-body" onSubmit={handleSubmit(onSubmit)}>
+        <PageHelmet title='Add Meals'></PageHelmet>
         <div className="form-control">
           <label htmlFor="mealTitle" className="label">
             <span className="label-text">Meal Title</span>

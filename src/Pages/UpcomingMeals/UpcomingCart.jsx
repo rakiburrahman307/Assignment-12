@@ -1,8 +1,10 @@
 
 import PropTypes from 'prop-types';
 
+
 const UpcomingCart = ({ cart }) => {
     const { mealType, mealImage, adminName, ingredients, price } = cart;
+
     return (
 
 
@@ -13,6 +15,7 @@ const UpcomingCart = ({ cart }) => {
                 <h5 className=" text-xl font-bold tracking-tight text-gray-900 dark:text-white">Distributer: {adminName}</h5>
                 <p className=" font-normal text-gray-700 dark:text-gray-400">Ingredients: {ingredients}</p>
                 <span className="text-3xl font-bold text-gray-900 dark:text-white">${price}</span>
+
             </div>
         </div>
 
@@ -22,6 +25,8 @@ const UpcomingCart = ({ cart }) => {
 
 UpcomingCart.propTypes = {
     cart: PropTypes.object,
+    handleLike: PropTypes.func,
+
 };
 
 export default UpcomingCart;

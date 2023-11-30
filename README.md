@@ -54,6 +54,7 @@ Welcome to UniStayHub – where finding the ideal student accommodation is as ea
 - React Helmet
 - React-query
 - React-Modal
+- Aos animation
 
 ## Component Libraries Use
 - DaisyUi 

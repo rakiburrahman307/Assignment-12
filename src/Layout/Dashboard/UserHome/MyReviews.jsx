@@ -97,13 +97,12 @@ const MyReviews = () => {
 
   return (
     <div>
-           <h2 className='text-center text-3xl py-5 font-bold'>My Reviews</h2>
+      <h2 data-aos="fade-up" className='text-center text-3xl py-5 font-bold'>My Reviews</h2>
       <PageHelmet title='My Review'></PageHelmet>
       <div className="py-10">
-        <h2 className="text-3xl font-bold text-center py-5">Customer Comment</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mx-5">
           {reviews.map((review) => (
-            <div key={review._id} className="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+            <div data-aos="fade-up" key={review._id} className="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
               <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{review?.customerName}</h5>
               <p className="font-normal text-gray-700 dark:text-gray-400">{review?.text}</p>
               <div className='mt-5 flex items-center gap-6 justify-between'>

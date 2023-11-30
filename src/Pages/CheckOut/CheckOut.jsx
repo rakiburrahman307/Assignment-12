@@ -77,22 +77,22 @@ const CheckOut = ({ plan }) => {
 
                 axiosSecure.post('/confirmPlans', userInfo)
                     .then((res) => {
-                     if (res?.data) {
-                        const adminInfo = {
-                            package: plan?.name
-                        };
+                        if (res?.data) {
+                            const adminInfo = {
+                                package: plan?.name
+                            };
 
-                        axiosSecure.patch(`/user_package/${user?.email}`, adminInfo)
-                            .then(() => {
-                                setTransactionId(paymentIntent?.id);
-                                toast.success('Payment Success');
-                                navigate(location?.state || '/');
-                            })
-                            .catch(adminError => {
-                                console.error("Error updating admin package:", adminError);
-                                toast.error('Payment Error');
-                            });
-                     }
+                            axiosSecure.patch(`/user_package/${user?.email}`, adminInfo)
+                                .then(() => {
+                                    setTransactionId(paymentIntent?.id);
+                                    toast.success('Payment Success');
+                                    navigate(location?.state || '/');
+                                })
+                                .catch(adminError => {
+                                    console.error("Error updating admin package:", adminError);
+                                    toast.error('Payment Error');
+                                });
+                        }
                     })
                     .catch(confirmError => {
                         console.error("Error confirming plans:", confirmError);

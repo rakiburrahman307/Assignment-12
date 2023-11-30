@@ -48,15 +48,15 @@ const Signup = () => {
                                 photoURL: photoUrl
                             }
                             axiosPublic.patch('/users', userInfo)
-                            .then(res =>{
-                                if (res.data.insertedId) {
-                                    toast.success("Create user successfully")
-                                    navigate("/")
-                                    
-                                }
-                            })
-                            .catch(err =>console.log(err.message));
-                        
+                                .then(res => {
+                                    if (res.data.insertedId) {
+                                        toast.success("Create user successfully")
+                                        navigate("/")
+
+                                    }
+                                })
+                                .catch(err => console.log(err.message));
+
 
                         })
                         .catch(err => {

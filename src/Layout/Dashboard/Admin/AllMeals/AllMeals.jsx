@@ -28,7 +28,7 @@ const AllMeals = () => {
 
             });
     }, [currentPage, itemsPerPage, axiosSecure, setLoading]);
-    
+
 
     const { data: totalCount = { count: 0 } } = useQuery({
         queryKey: ['count'],
@@ -37,7 +37,7 @@ const AllMeals = () => {
             return res.data;
         }
     });
-  
+
     const { count } = totalCount;
 
     const numberOfPages = Math.ceil(Number(count) / itemsPerPage);
@@ -59,41 +59,41 @@ const AllMeals = () => {
             setCurrentPage(currentPage + 1);
         }
     }
- const handleDelete = (id)  =>{
-    Swal.fire({
-        title: "Are you sure?",
-        text: "You won't be able to revert this!",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, delete it!"
-    }).then((result) => {
-        if (result.isConfirmed) {
-            axiosSecure.delete(`/allMeal/${id}`)
-                .then(res => {
-                    if (res.data.deletedCount) {
-                        Swal.fire({
-                            title: "Deleted!",
-                            text: "Your file has been deleted.",
-                            icon: "success"
-                        });
-                   const remaining = carts.filter(item => item?._id !== id)
-                   setCarts(remaining);
-                    }
-                })
-                .catch(err => console.log(err.message));
-        }
-    });
- }
+    const handleDelete = (id) => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axiosSecure.delete(`/allMeal/${id}`)
+                    .then(res => {
+                        if (res.data.deletedCount) {
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "Your file has been deleted.",
+                                icon: "success"
+                            });
+                            const remaining = carts.filter(item => item?._id !== id)
+                            setCarts(remaining);
+                        }
+                    })
+                    .catch(err => console.log(err.message));
+            }
+        });
+    }
     return (
         <div>
 
 
             <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-            <h2 className='text-center text-3xl font-bold py-5'>All Meals</h2>
-            <PageHelmet title='All Meals'></PageHelmet>
-                <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                <h2 className='text-center text-3xl font-bold py-5'>All Meals</h2>
+                <PageHelmet title='All Meals'></PageHelmet>
+                <table data-aos="fade-up" className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                     <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
                             <th scope="col" className="px-6 py-3">
@@ -125,7 +125,7 @@ const AllMeals = () => {
                     <tbody>
 
                         {
-                            carts?.map(cart => <tr key={cart._id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                            carts?.map(cart => <tr data-aos="fade-up" key={cart._id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                 <td>
                                     <div className="flex items-center gap-3">
                                         <div className="avatar">
@@ -155,7 +155,7 @@ const AllMeals = () => {
                                 </td>
                                 <td className="px-6 py-4 flex justify-evenly items-center gap-5">
                                     <Link to={`/dashboard/updateMeal/${cart?._id}`} className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</Link>
-                                    <button onClick={()=>handleDelete(cart?._id)} className="font-medium text-red-600 dark:text-blue-500 hover:underline">Delete</button>
+                                    <button onClick={() => handleDelete(cart?._id)} className="font-medium text-red-600 dark:text-blue-500 hover:underline">Delete</button>
                                 </td>
                             </tr>)
                         }

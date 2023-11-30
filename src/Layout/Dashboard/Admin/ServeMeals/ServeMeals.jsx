@@ -13,49 +13,49 @@ const ServeMeals = () => {
     const { data: requestedMeals = [], refetch } = useQuery({
         queryKey: ['requestedMeals', searchQuery],
         queryFn: async () => {
-          const res = await axiosSecure.get('/requested_meals', {
-            params: { username: searchQuery, email: searchQuery },
-          });
-          return res.data;
+            const res = await axiosSecure.get('/requested_meals', {
+                params: { username: searchQuery, email: searchQuery },
+            });
+            return res.data;
         },
-      });
+    });
 
-      // Function to handle serving a meal
-      const handleServeMeal = (mealId, status) => {
+    // Function to handle serving a meal
+    const handleServeMeal = (mealId, status) => {
         if (status === 'delivered') {
-          toast.warning('Meal is already served');
+            toast.warning('Meal is already served');
         } else {
             const info = {
                 status: 'delivered'
             };
 
-          axiosSecure.patch(`/req_meal_status/${mealId}`, info)
-          .then(res=>{
-            if(res.data.modifiedCount){
-                Swal.fire({
-                    position: "top-end",
-                    icon: "success",
-                    title: "Meal Serve",
-                    showConfirmButton: false,
-                    timer: 1500
-                  });
-                  refetch();
-            }
-          })
-          .catch(err=> console.log(err.message));
+            axiosSecure.patch(`/req_meal_status/${mealId}`, info)
+                .then(res => {
+                    if (res.data.modifiedCount) {
+                        Swal.fire({
+                            position: "top-end",
+                            icon: "success",
+                            title: "Meal Serve",
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                        refetch();
+                    }
+                })
+                .catch(err => console.log(err.message));
         }
-      };
+    };
 
-      
-    
+
+
     return (
         <div>
-       
+
 
             <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-            <h2 className='text-center text-3xl py-5 font-bold'>Serve Meal</h2>
-            <PageHelmet title='Serve Meals'></PageHelmet>
-                <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                <h2 className='text-center text-3xl py-5 font-bold'>Serve Meal</h2>
+                <PageHelmet title='Serve Meals'></PageHelmet>
+                <table data-aos="fade-up" className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                     <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
                             <th scope="col" className="px-6 py-3">
@@ -80,14 +80,14 @@ const ServeMeals = () => {
                                 Action
                             </th>
                             <th>
-                                     {/* Search bar */}
-                                     <input
-        className="input input-bordered input-xs w-28"
-        type="text"
-        placeholder="Search by username or email"
-        value={searchQuery}
-        onChange={(e) => setSearchQuery(e.target.value)}
-      />
+                                {/* Search bar */}
+                                <input
+                                    className="input input-bordered input-xs w-28"
+                                    type="text"
+                                    placeholder="Search by username or email"
+                                    value={searchQuery}
+                                    onChange={(e) => setSearchQuery(e.target.value)}
+                                />
                             </th>
                         </tr>
                     </thead>
@@ -120,7 +120,7 @@ const ServeMeals = () => {
                             </td>
                             <td className="px-6 py-4">
                                 {
-                                    meal.status==='delivered' ? <span className='text-green-500'>Done</span> : <button onClick={()=>handleServeMeal(meal._id, meal.status)} className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Serve</button>
+                                    meal.status === 'delivered' ? <span className='text-green-500'>Done</span> : <button onClick={() => handleServeMeal(meal._id, meal.status)} className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Serve</button>
                                 }
                             </td>
                         </tr>)

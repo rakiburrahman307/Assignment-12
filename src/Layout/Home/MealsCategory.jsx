@@ -4,7 +4,7 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import { useEffect, useState } from "react";
 import MealsCard from "./Mealscard";
-
+import './styleTab.css';
 const MealsCategory = () => {
     const [types, setTypes] = useState([]);
     const axiosPublic = useAxiosPublic();

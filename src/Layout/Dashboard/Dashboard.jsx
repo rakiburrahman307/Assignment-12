@@ -33,46 +33,46 @@ const Dashboard = () => {
 
             {/* dashboard side bar */}
             <div className="w-32 md:w-64 min-h-screen bg-base-200">
-                <ul className="menu rounded-box p-0 md:p-5">
+                <ul data-aos="fade-up" className="menu rounded-box p-0 md:p-5">
                     {isAdmin && isAdmin.admin && isAdmin !== undefined ? (
                         <>
-                            <li>
+                            <li data-aos="fade-up">
                                 <Link to="/dashboard/adminProfile" className="flex flex-col md:flex-row items-center text-center">
                                     <MdOutlineAdminPanelSettings />
                                     Admin Profile
                                 </Link>
                             </li>
-                            <li>
+                            <li data-aos="fade-up">
                                 <Link to="/dashboard/manageUsers" className="flex flex-col md:flex-row items-center text-center">
                                     <MdManageAccounts />
                                     Manage Users
                                 </Link>
                             </li>
-                            <li>
+                            <li data-aos="fade-up">
                                 <Link to="/dashboard/allMeals" className="flex flex-col md:flex-row items-center text-center">
                                     <MdNoMeals />
                                     All Meals
                                 </Link>
                             </li>
-                            <li>
+                            <li data-aos="fade-up">
                                 <Link to="/dashboard/addMeals" className="flex flex-col md:flex-row items-center text-center">
                                     <MdFormatListBulletedAdd />
                                     Add Meals
                                 </Link>
                             </li>
-                            <li>
+                            <li data-aos="fade-up">
                                 <Link to="/dashboard/serveMeals" className="flex flex-col md:flex-row items-center text-center">
                                     <AiOutlineCloudServer />
                                     Serve Meal
                                 </Link>
                             </li>
-                            <li>
+                            <li data-aos="fade-up">
                                 <Link to="/dashboard/allReviews" className="flex flex-col md:flex-row items-center text-center">
                                     <VscPreview />
                                     All Reviews
                                 </Link>
                             </li>
-                            <li>
+                            <li data-aos="fade-up">
                                 <Link to="/dashboard/upcoming" className="flex flex-col md:flex-row items-center text-center">
                                     <MdOutlineUpcoming />
                                     Upcoming
@@ -82,20 +82,20 @@ const Dashboard = () => {
                         </>
                     ) : (
                         <>
-                            <ul className="menu bg-base-200 w-56 rounded-box">
-                                <li>
+                            <ul data-aos="fade-up" className="menu bg-base-200 w-56 rounded-box">
+                                <li data-aos="fade-up">
                                     <Link to="/dashboard/userHome" className="flex flex-col md:flex-row items-center text-center">
                                         <FaHouseUser />
                                         My Profile
                                     </Link>
                                 </li>
-                                <li>
+                                <li data-aos="fade-up">
                                     <Link to='/dashboard/request_meal' className="flex flex-col md:flex-row items-center text-center">
                                         <CiSquareQuestion />
                                         Requested Meals
                                     </Link>
                                 </li>
-                                <li>
+                                <li data-aos="fade-up">
                                     <Link to='/dashboard/my_comment' className="flex flex-col md:flex-row items-center text-center">
                                         <VscOpenPreview />
                                         My Reviews
@@ -108,7 +108,7 @@ const Dashboard = () => {
                 </ul>
                 <div className="divider divider-info">Or</div>
                 <ul className="menu rounded-box p-0 md:p-5">
-                    <li>
+                    <li data-aos="fade-up">
                         <Link to='/' className="flex flex-col md:flex-row items-center text-center">
                             <FaHome />
                             Back To Home

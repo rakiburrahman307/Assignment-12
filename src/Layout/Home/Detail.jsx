@@ -16,7 +16,7 @@ const Detail = () => {
     const customerName = user?.displayName;
     const customerEmail = user?.email;
     const status = 'pending';
-    const { _id, mealType, mealImage, adminName, rating, likes, price, mealDescription, ingredients, postTime, reviews:review } = cardData;
+    const { _id, mealType, mealImage, adminName, rating, likes, price, mealDescription, ingredients, postTime, reviews: review } = cardData;
     const [liked, setLiked] = useState(false);
     const [likeCount, setLikeCount] = useState(likes);
     const mealInfo = { customerName, customerEmail, mealType, mealImage, adminName, rating, likes, price, mealDescription, ingredients, postTime, status, review }
@@ -68,12 +68,12 @@ const Detail = () => {
             axiosSecure.post(`/all_meals_review/${_id}`, comment)
                 .then(() => {
                     axiosSecure.post(`/reviewsCollections`, comment)
-                    .then(() => {
-                        toast.success('Comment Added successfully');
-                        refetch();
-                    })
-                    .catch(err => console.error(err));
-                   
+                        .then(() => {
+                            toast.success('Comment Added successfully');
+                            refetch();
+                        })
+                        .catch(err => console.error(err));
+
                 })
                 .catch(err => {
                     console.error(err);
@@ -96,7 +96,7 @@ const Detail = () => {
         }
     };
     return (
-        <div>
+        <div data-aos="fade-up">
             <div className="card card-side bg-base-100 shadow-xl">
                 <figure><img className="w-96 mx-10" src={mealImage} alt="Meal" /></figure>
                 <div className="card-body">

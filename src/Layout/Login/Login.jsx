@@ -43,15 +43,15 @@ const Login = () => {
                     photoURL: res?.user?.photoURL
                 }
                 axiosPublic.patch('/users', userInfo)
-                .then(res =>{
-                    if (res.data.insertedId) {
-                        toast.success('Sign in successful');
-                        navigate(location?.state ? location.state : '/');
-                        
-                    }
-                })
-                .catch(err =>console.log(err.message));
-               
+                    .then(res => {
+                        if (res.data.insertedId) {
+                            toast.success('Sign in successful');
+                            navigate(location?.state ? location.state : '/');
+
+                        }
+                    })
+                    .catch(err => console.log(err.message));
+
 
             })
             .catch((err) => {
