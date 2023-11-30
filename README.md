@@ -78,7 +78,7 @@ Filter options based on preferences such as location, budget, amenities, and mor
 
 ## License
 This project is licensed under the [UniStayHub](LICENSE).
-This project live link [https://65677819d07b794287985cc9--relaxed-puffpuff-31caad.netlify.app/](LInk).
+This project live link [https://656888cd76ceac2c2dbeb5a7--relaxed-puffpuff-31caad.netlify.app/](LInk).
 
 ## Contact
 For questions or feedback, contact:
