@@ -14,11 +14,7 @@ Welcome to UniStayHub – where finding the ideal student accommodation is as ea
 ## Features
 
 - Home Page
-- User Panel
-- Admin Panel
 - Meals Page
-- Upcoming Page
-- Profile Page
 - LogIn Page
 - Registration Page
 - User authentication for personalized experience
@@ -26,23 +22,42 @@ Welcome to UniStayHub – where finding the ideal student accommodation is as ea
 - Responsive design for various devices
 - Implementation the Dark theme on the Home pages
 
+## User Panel
+
+- User Dashboard
+- User Profile
+- User Reviews 
+- User Meals orders
+
+## Admin Panel
+- Admin Dashboard
+- Admin Profile
+- All Reviews 
+- Manage Users
+- All Meals
+- Serve meals
+- Upcoming meals
+
+
+
 ## Technologies Used
 - React.js
 - Tailwind CSS
 - Firebase (for authentication)
 - MongoDb (for data storage)
-- Aos Animation
 - Sweet alert2
 - React icons
 - Node.js
-- EmailJs
-- React Pdf
+- Stripe Payment Gateway
 - React toasty
-- Framer Motion
-- React Marquee
+- SweetAlert2
 - React Helmet
 - React-query
+- React-Modal
 
+## Component Libraries Use
+- DaisyUi 
+- FlowBite
 
 ## Installation
 1. Clone the repository.

@@ -68,6 +68,7 @@ const AddMeal = () => {
 
   return (
     <div className="card shrink-0 w-full shadow-2xl bg-base-100">
+           <h2 className='text-center text-3xl font-bold'>Add Meal</h2>
       <form className="card-body" onSubmit={handleSubmit(onSubmit)}>
     <PageHelmet title='Add Meals'></PageHelmet>
         <div className="form-control">

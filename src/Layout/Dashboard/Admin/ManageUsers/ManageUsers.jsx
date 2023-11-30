@@ -58,7 +58,7 @@ const ManageUsers = () => {
     
     return (
         <div>
-       
+            <h2 className='text-center text-3xl py-5 font-bold'>Manage User</h2>
        <PageHelmet title='Manage Users'></PageHelmet>
             <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
                 <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -72,6 +72,9 @@ const ManageUsers = () => {
                             </th>
                             <th scope="col" className="px-6 py-3">
                                 Email
+                            </th>
+                            <th scope="col" className="px-6 py-3">
+                                Package
                             </th>
                             <th scope="col" className="px-6 py-3">
                                Role
@@ -108,6 +111,9 @@ const ManageUsers = () => {
                             </th>
                             <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                 {user?.email}
+                            </th>
+                            <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                {user?.package || 'Bronze'}
                             </th>
                             <td className="px-6 py-4">
                                 {user?.role}

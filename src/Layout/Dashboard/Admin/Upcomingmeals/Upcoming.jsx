@@ -67,7 +67,7 @@ const Upcoming = () => {
 
     return (
         <div>
-
+     <h2 className='text-center text-3xl font-bold py-5'>Upcoming Meals</h2>
             <PageHelmet title='Upcoming Meals'></PageHelmet>
             <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
                 <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">

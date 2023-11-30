@@ -97,6 +97,7 @@ const MyReviews = () => {
 
   return (
     <div>
+           <h2 className='text-center text-3xl py-5 font-bold'>My Reviews</h2>
       <PageHelmet title='My Review'></PageHelmet>
       <div className="py-10">
         <h2 className="text-3xl font-bold text-center py-5">Customer Comment</h2>

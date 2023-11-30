@@ -1,21 +1,23 @@
 import { useEffect, useState } from "react";
-import useAxiosPublic from "../../../../Hooks/useAxiosPublic";
 import useAuth from "../../../../Hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import PageHelmet from "../../../../Hooks/pageHelmet";
+import Swal from "sweetalert2";
+import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
+import { Link } from "react-router-dom";
 
 
 const AllMeals = () => {
     const [itemsPerPage, setItemsPerPage] = useState(8);
     const [currentPage, setCurrentPage] = useState(0);
     const [carts, setCarts] = useState([]);
-    const axiosPublic = useAxiosPublic();
+    const axiosSecure = useAxiosSecure();
     const { setLoading } = useAuth();
 
 
     useEffect(() => {
 
-        axiosPublic
+        axiosSecure
             .get(`/all_meals/pagination?page=${currentPage}&size=${itemsPerPage}`)
             .then((res) => {
                 setCarts(res.data);
@@ -25,17 +27,17 @@ const AllMeals = () => {
                 console.error("Error fetching meals:", error);
 
             });
-    }, [currentPage, itemsPerPage, axiosPublic, setLoading]);
+    }, [currentPage, itemsPerPage, axiosSecure, setLoading]);
     
 
     const { data: totalCount = { count: 0 } } = useQuery({
         queryKey: ['count'],
         queryFn: async () => {
-            const res = await axiosPublic("/all_meals_count");
+            const res = await axiosSecure("/all_meals_count");
             return res.data;
         }
     });
-
+  
     const { count } = totalCount;
 
     const numberOfPages = Math.ceil(Number(count) / itemsPerPage);
@@ -57,12 +59,39 @@ const AllMeals = () => {
             setCurrentPage(currentPage + 1);
         }
     }
-
+ const handleDelete = (id)  =>{
+    Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            axiosSecure.delete(`/allMeal/${id}`)
+                .then(res => {
+                    if (res.data.deletedCount) {
+                        Swal.fire({
+                            title: "Deleted!",
+                            text: "Your file has been deleted.",
+                            icon: "success"
+                        });
+                   const remaining = carts.filter(item => item?._id !== id)
+                   setCarts(remaining);
+                    }
+                })
+                .catch(err => console.log(err.message));
+        }
+    });
+ }
     return (
         <div>
 
 
             <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+            <h2 className='text-center text-3xl font-bold py-5'>All Meals</h2>
             <PageHelmet title='All Meals'></PageHelmet>
                 <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                     <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -84,6 +113,9 @@ const AllMeals = () => {
                             </th>
                             <th scope="col" className="px-6 py-3">
                                 Price
+                            </th>
+                            <th scope="col" className="px-6 py-3">
+                                Rating
                             </th>
                             <th scope="col" className="px-6 py-3">
                                 Action
@@ -119,7 +151,11 @@ const AllMeals = () => {
                                     $ {cart?.price}
                                 </td>
                                 <td className="px-6 py-4">
-                                    <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                                    {cart?.rating}
+                                </td>
+                                <td className="px-6 py-4 flex justify-evenly items-center gap-5">
+                                    <Link to={`/dashboard/updateMeal/${cart?._id}`} className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</Link>
+                                    <button onClick={()=>handleDelete(cart?._id)} className="font-medium text-red-600 dark:text-blue-500 hover:underline">Delete</button>
                                 </td>
                             </tr>)
                         }

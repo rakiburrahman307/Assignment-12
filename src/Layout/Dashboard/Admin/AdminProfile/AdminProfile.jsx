@@ -15,6 +15,7 @@ const AdminProfile = () => {
     })
     return (
         <div className="">
+                 <h2 className='text-center text-3xl font-bold py-5'>Admin Profile</h2>
             <PageHelmet title='Admin Profile'></PageHelmet>
             <div className="w-full max-w-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mx-auto">
 

@@ -10,7 +10,7 @@ const AdminRoute = ({ children }) => {
 
     if (loading || isAdminLoading) {
         return <span className="loading ml-[700px] loading-dots loading-lg"></span>
-    } else if (user && isAdmin) {
+    } else if (user && isAdmin && isAdmin.admin && isAdmin !== undefined) {
         return children;
     } else {
         return <Navigate to="/" state={location.pathname} replace></Navigate>

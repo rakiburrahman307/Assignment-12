@@ -1,6 +1,6 @@
 import axios from "axios";
 const axiosSecure = axios.create({
-    baseURL: 'https://assignment-12-server-beta-roan.vercel.app',
+    baseURL: 'http://localhost:5000',
     withCredentials: true,
 })
 

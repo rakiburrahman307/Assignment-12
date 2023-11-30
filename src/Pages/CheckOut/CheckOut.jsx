@@ -6,94 +6,113 @@ import useAuth from "../../Hooks/useAuth";
 import { toast } from "react-toastify";
 import { useLocation, useNavigate } from "react-router-dom";
 
-
 const CheckOut = ({ plan }) => {
     const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false);
     const [clientSecret, setClientSecret] = useState('');
-    const [transactionId, setTransactionId] = useState();
+    const [transactionId, setTransactionId] = useState('');
     const navigate = useNavigate();
     const location = useLocation();
-    const { user } = useAuth()
+    const { user } = useAuth();
     const stripe = useStripe();
     const elements = useElements();
-    const { price, name } = plan;
-
     const axiosSecure = useAxiosSecure();
 
-
     useEffect(() => {
-        axiosSecure.post('/create-payment-intent', { price: price })
+        axiosSecure.post('/create-payment-intent', { price: plan?.price })
             .then(res => {
-
-                setClientSecret(res.data.clientSecret);
+                setClientSecret(res?.data?.clientSecret);
             })
-    }, [axiosSecure, price]);
+            .catch(err => {
+                console.error("Error fetching client secret:", err);
+            });
+    }, [axiosSecure, plan?.price]);
+
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        if (!stripe && !elements) {
-            return
+        if (!stripe || !elements) {
+            return;
         }
+
+        setLoading(true);
+
         const card = elements.getElement(CardElement);
 
-        if (card === null) {
-            return
-        }
+        try {
+            const { error } = await stripe.createPaymentMethod({
+                type: 'card',
+                card,
+            });
 
-        const { error } = await stripe.createPaymentMethod({
-            type: 'card',
-            card
-        });
-
-        if (error) {
-
-            setError(error.message);
-        } else {
-            
-            setError('');
-        }
-
-        const { paymentIntent, error: confirmError } = await stripe.confirmCardPayment(clientSecret, {
-            payment_method: {
-                card: card,
-                billing_details: {
-                    email: user?.email || 'anonymous',
-                    name: user?.displayName || 'anonymous'
-
-                }
+            if (error) {
+                throw new Error(error.message);
             }
-        })
-        if (confirmError) {
-            console.log(confirmError.message);
-        } else {
+
+            setError('');
+
+            const { paymentIntent, error: confirmError } = await stripe.confirmCardPayment(clientSecret, {
+                payment_method: {
+                    card,
+                    billing_details: {
+                        email: user?.email || 'anonymous',
+                        name: user?.displayName || 'anonymous'
+                    },
+                }
+            });
+
+            if (confirmError) {
+                throw new Error(confirmError.message);
+            }
+
             if (paymentIntent.status === 'succeeded') {
-                const info = {
+                const userInfo = {
                     name: user?.displayName,
                     email: user?.email,
                     photoURL: user?.photoURL,
-                    package: name,
+                    package: plan?.name,
                     transactionID: paymentIntent?.id,
-                    price: price
-                }
-                axiosSecure.post('/confirmPlans',info)
-                .then(() =>{
-                    setTransactionId(paymentIntent?.id);
-                    toast.success('Payment Success');
-                    navigate(location?.state ? location.state : '/');
-                    
-                })
-                .catch(err =>confirmError(err.message));
-                
+                    price: plan?.price
+                };
+
+                axiosSecure.post('/confirmPlans', userInfo)
+                    .then((res) => {
+                     if (res?.data) {
+                        const adminInfo = {
+                            package: plan?.name
+                        };
+
+                        axiosSecure.patch(`/user_package/${user?.email}`, adminInfo)
+                            .then(() => {
+                                setTransactionId(paymentIntent?.id);
+                                toast.success('Payment Success');
+                                navigate(location?.state || '/');
+                            })
+                            .catch(adminError => {
+                                console.error("Error updating admin package:", adminError);
+                                toast.error('Payment Error');
+                            });
+                     }
+                    })
+                    .catch(confirmError => {
+                        console.error("Error confirming plans:", confirmError);
+                        toast.error('Payment Error');
+                    });
             } else {
                 setTransactionId('');
                 toast.error('Payment Error');
             }
+        } catch (error) {
+            console.error("Payment error:", error.message);
+            setError(error.message);
+        } finally {
+            setLoading(false);
         }
+    };
 
-    }
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
+        <div className="card shrink-0 w-full max-w-lg shadow-2xl bg-base-100 mx-auto py-10">
+            <form className="card-body" onSubmit={handleSubmit}>
                 <CardElement
                     options={{
                         style: {
@@ -110,17 +129,18 @@ const CheckOut = ({ plan }) => {
                         },
                     }}
                 />
-                <button className="btn btn-sm btn-primary my-4" type="submit" disabled={!stripe && !clientSecret}>
-                    Pay
+                <button className="btn btn-sm btn-primary my-4" type="submit" disabled={!stripe || loading}>
+                    {loading ? 'Processing...' : 'Pay'}
                 </button>
             </form>
-            <p className="text-red-600">{error}</p>
-            <p className="text-green-600">{transactionId}</p>
+            {error && <p className="text-red-600 text-center">{error}</p>}
+            {transactionId && <p className="text-green-600 text-center">{transactionId}</p>}
         </div>
     );
 };
+
 CheckOut.propTypes = {
     plan: PropTypes.object,
-
 };
+
 export default CheckOut;

@@ -16,6 +16,7 @@ const RequestMeals = () => {
     })
     return (
         <div>
+                 <h2 className='text-center text-3xl py-5 font-bold'>Requested Meals</h2>
             <PageHelmet title='Request Meals'></PageHelmet>
              <div className="overflow-x-auto">
                 <table className="table">
