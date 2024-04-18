@@ -22,6 +22,9 @@ import AddMeal from "../Layout/Dashboard/Admin/AddMeal/AddMeal";
 import AllReviews from "../Layout/Dashboard/Admin/AllReviews/AllReviews";
 import Upcoming from "../Layout/Dashboard/Admin/Upcomingmeals/Upcoming";
 import UpdateMeal from "../Layout/Dashboard/Admin/UpdateMeal/UpdateMeal";
+import PaymentSuccess from "../Pages/PaymentSuccess/PaymentSuccess";
+import PaymentFail from "../Pages/PaymentFail/PaymentFail";
+
 
 
 
@@ -41,13 +44,21 @@ const router = createBrowserRouter([
         element: <Login />,
       },
       {
+        path: "/payment/success/:id",
+        element: <PaymentSuccess></PaymentSuccess>
+      },
+      {
+        path: "/payment/fail/:id",
+        element: <PaymentFail></PaymentFail>
+      },
+      {
         path: "/sign-up",
         element: <Signup></Signup>
       },
       {
         path: '/detail/:id',
         element: <PrivateRoute><Detail></Detail></PrivateRoute>,
-        loader: ({ params }) => fetch(`https://assignment-12-server-beta-roan.vercel.app/all_meals/${params.id}`)
+        loader: ({ params }) => fetch(`http://localhost:5000/all_meals/${params.id}`)
       },
       {
         path: '/meals',
@@ -60,8 +71,9 @@ const router = createBrowserRouter([
       {
         path: '/payment/:id',
         element: <PrivateRoute> <Payment></Payment></PrivateRoute>,
-        loader: ({ params }) => fetch(`https://assignment-12-server-beta-roan.vercel.app/plans/${params.id}`)
-      }
+        loader: ({ params }) => fetch(`http://localhost:5000/plans/${params.id}`)
+      },
+
 
     ],
   },
@@ -74,6 +86,7 @@ const router = createBrowserRouter([
         path: 'userHome',
         element: <UserHome></UserHome>
       },
+      
       {
         path: '/dashboard/request_meal',
         element: <RequestMeals></RequestMeals>
@@ -114,7 +127,7 @@ const router = createBrowserRouter([
       {
         path: '/dashboard/updateMeal/:id',
         element: <AdminRoute><UpdateMeal></UpdateMeal></AdminRoute>,
-        loader: ({ params }) => fetch(`https://assignment-12-server-beta-roan.vercel.app/all_meals/${params.id}`)
+        loader: ({ params }) => fetch(`http://localhost:5000/all_meals/${params.id}`)
 
       }
 

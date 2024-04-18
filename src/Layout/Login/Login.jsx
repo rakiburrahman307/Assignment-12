@@ -20,7 +20,10 @@ const Login = () => {
     const onSubmit = (event) => {
         const email = event.email;
         const password = event.password;
-        logInWithEmailAndPassword(email, password)
+        const passwordRegex = /^.{6,}$/;
+        const isValidPassword = passwordRegex.test(password);
+        if (isValidPassword) {
+            logInWithEmailAndPassword(email, password)
             .then(() => {
                 // Signed in 
                 toast.success('Sign in successful');
@@ -28,9 +31,13 @@ const Login = () => {
 
             })
             .catch((error) => {
-                toast.error(error.message);
+                console.log(error.message);
             });
 
+        } else {
+            toast.error("Password must be at least 6 characters.");
+        }
+       
 
     };
 
