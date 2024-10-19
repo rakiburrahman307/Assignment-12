@@ -1,13 +1,17 @@
-import { Outlet } from "react-router-dom";
-import Navbar from "../Navbar/Navbar";
+import  { Suspense, lazy } from "react";
+import Spinner from "../../Components/Spinner/Spinner";
 
 
+const Navbar = lazy(() => import("../Navbar/Navbar"));
+const Outlet = lazy(() => import("react-router-dom").then(module => ({ default: module.Outlet }))); // Lazy load Outlet
 
 const Root = () => {
     return (
-        <div>
-            <Navbar></Navbar>
-            <Outlet></Outlet>
+        <div className="max-w-[1440px] mx-auto">
+            <Suspense fallback={<Spinner />}>
+                <Navbar />
+                <Outlet />
+            </Suspense>
         </div>
     );
 };

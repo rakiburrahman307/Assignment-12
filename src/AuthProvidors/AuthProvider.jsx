@@ -91,11 +91,9 @@ const AuthProvider = ({ children }) => {
   }
   return (
     <AuthContext.Provider value={authInfo}>
-      {loading ? (
-        <span className="loading ml-[700px] loading-dots loading-lg"></span>
-      ) : (
+      {
         children
-      )}
+      }
     </AuthContext.Provider>
   );
 };

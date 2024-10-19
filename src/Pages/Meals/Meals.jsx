@@ -20,7 +20,7 @@ const Meals = () => {
             <h2 className="text-3xl font-bold p-8 text-center">All Meals</h2>
             <div className='grid grid-cols-1 md:grid-cols-3 gap-5 mx-6'>
                 {
-                    carts && carts.map(cart => <MealsCard key={cart._id} carts={cart}></MealsCard>)
+                    carts && carts?.map(cart => <MealsCard key={cart._id} carts={cart}></MealsCard>)
                 }
             </div>
 
