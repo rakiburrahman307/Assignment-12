@@ -16,7 +16,7 @@ const MyReviews = () => {
       const res = await axiosSecure.get(`/reviews/${user?.email}`);
       return res.data;
     }
-  })
+  });
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [updatedText, setUpdatedText] = useState('');
@@ -92,18 +92,24 @@ const MyReviews = () => {
       bottom: 'auto',
       marginRight: '-50%',
       transform: 'translate(-50%, -50%)',
+      width: '90%', // Set width to 90% of the viewport width
+      maxWidth: '500px', // Max width for larger screens
     },
   };
 
   return (
-    <div>
+    <div className="max-w-screen-lg mx-auto px-4 sm:px-6 lg:px-8">
       <h2 data-aos="fade-up" className='text-center text-3xl py-5 font-bold'>My Reviews</h2>
       <PageHelmet title='My Review'></PageHelmet>
       <div className="py-10">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mx-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {reviews.map((review) => (
-            <div data-aos="fade-up" key={review._id} className="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-              <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{review?.customerName}</h5>
+            <div
+              data-aos="fade-up"
+              key={review._id}
+              className="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+            >
+              <h5 className="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">{review?.customerName}</h5>
               <p className="font-normal text-gray-700 dark:text-gray-400">{review?.text}</p>
               <div className='mt-5 flex items-center gap-6 justify-between'>
                 <button onClick={() => handleUpdateComment(review?._id)} className="btn btn-sm">Update</button>
@@ -127,8 +133,10 @@ const MyReviews = () => {
           placeholder="Enter updated comment"
           className="w-full h-40 p-2 border rounded mb-4"
         />
-        <button onClick={handleUpdateText} className="btn btn-primary">Update Comment</button>
-        <button onClick={handleModalClose} className="btn btn-secondary ml-2">Cancel</button>
+        <div className="flex justify-between">
+          <button onClick={handleUpdateText} className="btn btn-primary">Update Comment</button>
+          <button onClick={handleModalClose} className="btn btn-secondary ml-2">Cancel</button>
+        </div>
       </Modal>
     </div>
   );

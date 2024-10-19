@@ -22,13 +22,13 @@ const UserHome = () => {
     };
 
     return (
-        <div className="">
+        <div className="max-w-screen-lg mx-auto px-4 sm:px-6 lg:px-8">
             <h2 data-aos="fade-up" className='text-center text-3xl font-bold py-5'>User Home</h2>
             <PageHelmet title='User Home'></PageHelmet>
-            <div className="w-full max-w-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mx-auto">
+            <div className="w-full max-w-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mx-auto p-4 sm:p-6">
                 <div className="flex flex-col items-center pb-10">
                     <div className="avatar relative">
-                        <div className="w-24 rounded-full ">
+                        <div className="w-24 h-24 sm:w-32 sm:h-32 rounded-full overflow-hidden">
                             {/* Badge for package */}
                             {
                                 userProfile?.package ? (

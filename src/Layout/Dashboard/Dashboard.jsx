@@ -2,7 +2,7 @@ import { Link, Outlet, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { VscOpenPreview } from "react-icons/vsc";
 import { CiSquareQuestion } from "react-icons/ci";
-import { FaHome, FaHouseUser } from "react-icons/fa";
+import { FaArrowLeft, FaArrowRight, FaHome, FaHouseUser } from "react-icons/fa";
 import { MdFormatListBulletedAdd, MdNoMeals, MdOutlineAdminPanelSettings, MdOutlineUpcoming } from "react-icons/md";
 import useIsAdmin from "../../Hooks/useIsAdmin";
 import { MdManageAccounts } from "react-icons/md";
@@ -21,6 +21,20 @@ const Dashboard = () => {
         }
     }, [isAdmin, navigate]);
 
+    // Reset sidebar state on window resize
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth >= 768) {
+                setIsSidebarOpen(true); // Open sidebar on larger screens
+            } else {
+                setIsSidebarOpen(false); // Close sidebar on smaller screens
+            }
+        };
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
     if (isAdminLoading || isAdmin === undefined) {
         return <span className="loading ml-[700px] loading-dots loading-lg"></span>;
     }
@@ -34,14 +48,15 @@ const Dashboard = () => {
             {/* Sidebar Toggle Button */}
             <button 
                 onClick={toggleSidebar} 
-                className={`md:hidden p-2 bg-blue-500 text-white rounded absolute top-4 left-4 z-50`}
+                className={`md:hidden p-2 bg-blue-500 text-white rounded absolute top-4 right-4 z-50`}
             >
-                {isSidebarOpen ? 'Close' : 'Open'}
+                {isSidebarOpen ? <FaArrowLeft /> : <FaArrowRight />}
             </button>
 
             {/* Sidebar */}
-            <div className={`transition-transform duration-300 transform ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} 
-                md:translate-x-0 w-64 bg-base-200 min-h-screen fixed md:relative z-40`}>
+            <div className={`transition-transform duration-300 transform 
+                ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} 
+                md:translate-x-0 w-64 bg-base-200 min-h-screen fixed top-0 left-0 z-40`}>
                 <ul className="menu rounded-box p-5">
                     {isAdmin && isAdmin.admin ? (
                         <>
@@ -123,7 +138,7 @@ const Dashboard = () => {
             </div>
 
             {/* Dashboard Content */}
-            <div className={`flex-1 p-5 md:p-8 bg-base-100 transition-all duration-300 ${isSidebarOpen ? 'ml-64' : 'ml-0'} `}>
+            <div className={`flex-1 p-5 md:p-8 bg-base-100 transition-all duration-300 ${isSidebarOpen ? 'ml-64' : 'ml-0'} md:ml-64`}>
                 <Outlet />
             </div>
         </div>
