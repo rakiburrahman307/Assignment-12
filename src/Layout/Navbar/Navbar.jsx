@@ -17,7 +17,7 @@ const Navbar = () => {
 
   return (
     <div
-      className={`navbar ${
+      className={`flex justify-between items-center px-5 py-3 ${
         darkMode ? "bg-black" : "bg-[#161616]"
       } sticky top-0 z-20 shadow-lg`}
     >
@@ -46,7 +46,7 @@ const Navbar = () => {
 
       <ToastContainer />
 
-      <div className='navbar-end flex items-center'>
+      <div className='flex items-center justify-end'>
         <DarkModeToggle darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
         {user ? (
           <UserProfileDropdown user={user} logOut={logOut} />
