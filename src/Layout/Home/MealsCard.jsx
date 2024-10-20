@@ -26,7 +26,7 @@ const MealsCard = ({ carts }) => {
       data-aos='fade-up'
       className='w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700'
     >
-      <div className='p-8 h-80'>
+      <div className='p-1 h-60'>
         <img
           className={`rounded-t-lg w-full h-full object-cover transition-all duration-700 ease-in-out ${
             isLoaded ? "blur-0" : "blur-lg"
@@ -38,7 +38,7 @@ const MealsCard = ({ carts }) => {
         />
       </div>
 
-      <div className='px-5 pb-5'>
+      <div className='px-2 mt-5 pb-2'>
         <h5 className='text-2xl font-semibold tracking-tight text-gray-900 dark:text-white'>
           Title: {mealTitle}
         </h5>
@@ -60,12 +60,12 @@ const MealsCard = ({ carts }) => {
             <SlLike /> {likes}
           </button>
         </div>
-        <div className='flex items-center justify-between'>
+        <div className='flex items-center justify-between mb-2'>
           <span className='text-3xl font-bold text-gray-900 dark:text-white'>
             ${price}
           </span>
           <Link to={`/detail/${_id}`}>
-            <button className='text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'>
+            <button className='rounded-lg border-[1px] border-sky-500 px-5 py-1 text-lg text-sky-500 duration-200 hover:bg-sky-500 hover:text-white'>
               Details
             </button>
           </Link>
