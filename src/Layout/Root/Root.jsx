@@ -3,7 +3,7 @@ import Spinner from "../../Components/Spinner/Spinner";
 
 
 const Navbar = lazy(() => import("../Navbar/Navbar"));
-const Outlet = lazy(() => import("react-router-dom").then(module => ({ default: module.Outlet }))); // Lazy load Outlet
+const Outlet = lazy(() => import("react-router-dom").then(module => ({ default: module.Outlet })));
 
 const Root = () => {
     return (

@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
-import MealsCard from "../../Layout/Home/Mealscard";
+import { lazy } from "react";
+const MealsCard = lazy(() => import("../../Layout/Home/MealsCard"));
 
 
 const Meals = () => {

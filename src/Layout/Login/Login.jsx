@@ -7,7 +7,7 @@ import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import bg from "../../assets/login/bg.jpg";
 
 const Login = () => {
-  const { logInWithGoogle, logInWithEmailAndPassword } = useAuth();
+  const { logInWithGoogle, logInWithEmailAndPassword, loading } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const axiosPublic = useAxiosPublic();
@@ -102,6 +102,10 @@ const Login = () => {
                   <h2 className='text-3xl label-text my-4 font-bold'>
                     Login now!
                   </h2>
+                  <p className='text-black'>
+                    As Admin Email: admin1@gmail.com{" "}
+                  </p>
+                  <p className='text-black'>Password: Admin@1234</p>
                   <label className='label'>
                     <span className='label-text'>Email</span>
                   </label>
@@ -111,7 +115,9 @@ const Login = () => {
                     {...register("email", { required: "Email is required" })}
                   />
                   {errors.email && (
-                    <span className='text-red-700'>{errors.email.message}</span>
+                    <span className='text-red-700'>
+                      {errors?.email?.message}
+                    </span>
                   )}
                 </div>
                 <div className='form-control'>
@@ -130,15 +136,19 @@ const Login = () => {
                       },
                     })}
                   />
-                  {errors.password && (
+                  {errors?.password && (
                     <span className='text-red-700'>
-                      {errors.password.message}
+                      {errors?.password?.message}
                     </span>
                   )}
                 </div>
                 <div className='form-control mt-6'>
-                  <button className='text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2'>
-                    Login
+                  <button className='text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl  focus:outline-none dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2'>
+                    {loading ? (
+                      <span className='loading loading-dots loading-md'></span>
+                    ) : (
+                      "Login"
+                    )}
                   </button>
                 </div>
                 <label className='label'>

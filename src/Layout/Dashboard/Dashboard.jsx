@@ -1,5 +1,6 @@
-import { Link, Outlet, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+
+import { lazy, Suspense, useEffect, useState } from "react";
 import { VscOpenPreview } from "react-icons/vsc";
 import { CiSquareQuestion } from "react-icons/ci";
 import { FaArrowLeft, FaArrowRight, FaHome, FaHouseUser } from "react-icons/fa";
@@ -12,6 +13,11 @@ import {
 import useIsAdmin from "../../Hooks/useIsAdmin";
 import { MdManageAccounts } from "react-icons/md";
 import { AiOutlineCloudServer } from "react-icons/ai";
+import Spinner from "../../Components/Spinner/Spinner";
+
+const Outlet = lazy(() =>
+  import("react-router-dom").then((module) => ({ default: module.Outlet }))
+);
 
 const Dashboard = () => {
   const [isAdmin, isAdminLoading] = useIsAdmin();
@@ -30,9 +36,9 @@ const Dashboard = () => {
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 768) {
-        setIsSidebarOpen(true); // Open sidebar on larger screens
+        setIsSidebarOpen(true);
       } else {
-        setIsSidebarOpen(false); // Close sidebar on smaller screens
+        setIsSidebarOpen(false);
       }
     };
 
@@ -175,7 +181,9 @@ const Dashboard = () => {
           isSidebarOpen ? "ml-64" : "ml-0"
         } md:ml-64`}
       >
-        <Outlet />
+        <Suspense fallback={<Spinner />}>
+          <Outlet />
+        </Suspense>
       </div>
     </div>
   );

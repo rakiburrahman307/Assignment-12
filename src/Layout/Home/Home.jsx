@@ -1,18 +1,18 @@
-
-import Footer from "../Footer/Footer";
-import Banner from "./Banner";
-import FeaturedContent from "./FeaturedContent";
-import MealsCategory from "./MealsCategory";
-import OurPlans from "./OurPlans";
+import { lazy } from 'react';
+const Footer = lazy(() => import("../Footer/Footer"));
+const Banner = lazy(() => import("./Banner"));
+const FeaturedContent = lazy(() => import("./FeaturedContent"));
+const MealsCategory = lazy(() => import("./MealsCategory"));
+const OurPlans = lazy(() => import("./OurPlans"));
 
 const Home = () => {
     return (
         <div className="max-w-[1440px] mx-auto">
-            <Banner></Banner>
-            <MealsCategory></MealsCategory>
-            <OurPlans></OurPlans>
-            <FeaturedContent></FeaturedContent>
-            <Footer></Footer>
+            <Banner />
+            <MealsCategory />
+            <OurPlans />
+            <FeaturedContent />
+            <Footer />
         </div>
     );
 };

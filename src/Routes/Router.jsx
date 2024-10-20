@@ -1,33 +1,51 @@
 import { createBrowserRouter } from "react-router-dom";
-import Home from "../Layout/Home/Home";
-import Root from "../Layout/Root/Root";
-import Login from "../Layout/Login/Login";
-import Signup from "../Layout/SignUp/Signup";
-import Detail from "../Layout/Home/Detail";
+import { lazy } from "react";
 import PrivateRoute from "./PrivateRoute";
-import ErrorPage from "../Pages/ErrorPage/ErrorPage";
-import MealsAll from "../Pages/Meals/MealsAll";
-import UpcomingMeals from "../Pages/UpcomingMeals/UpcomingMeals";
-import Dashboard from "../Layout/Dashboard/Dashboard";
-import UserHome from "../Layout/Dashboard/UserHome/UserHome";
-import Payment from "../Pages/Payment/Payment";
-import RequestMeals from "../Layout/Dashboard/UserHome/RequestMeals";
-import MyComment from "../Layout/Dashboard/UserHome/MyReviews";
-import AdminProfile from "../Layout/Dashboard/Admin/AdminProfile/AdminProfile";
 import AdminRoute from "./AdminRouts";
-import ManageUsers from "../Layout/Dashboard/Admin/ManageUsers/ManageUsers";
-import ServeMeals from "../Layout/Dashboard/Admin/ServeMeals/ServeMeals";
-import AllMeals from "../Layout/Dashboard/Admin/AllMeals/AllMeals";
-import AddMeal from "../Layout/Dashboard/Admin/AddMeal/AddMeal";
-import AllReviews from "../Layout/Dashboard/Admin/AllReviews/AllReviews";
-import Upcoming from "../Layout/Dashboard/Admin/Upcomingmeals/Upcoming";
-import UpdateMeal from "../Layout/Dashboard/Admin/UpdateMeal/UpdateMeal";
-import PaymentSuccess from "../Pages/PaymentSuccess/PaymentSuccess";
-import PaymentFail from "../Pages/PaymentFail/PaymentFail";
+import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 
-
-
-
+const Root = lazy(() => import("../Layout/Root/Root"));
+const Home = lazy(() => import("../Layout/Home/Home"));
+const Login = lazy(() => import("../Layout/Login/Login"));
+const Signup = lazy(() => import("../Layout/SignUp/Signup"));
+const Detail = lazy(() => import("../Layout/Home/Detail"));
+const MealsAll = lazy(() => import("../Pages/Meals/MealsAll"));
+const UpcomingMeals = lazy(() =>
+  import("../Pages/UpcomingMeals/UpcomingMeals")
+);
+const Dashboard = lazy(() => import("../Layout/Dashboard/Dashboard"));
+const UserHome = lazy(() => import("../Layout/Dashboard/UserHome/UserHome"));
+const Payment = lazy(() => import("../Pages/Payment/Payment"));
+const RequestMeals = lazy(() =>
+  import("../Layout/Dashboard/UserHome/RequestMeals")
+);
+const MyComment = lazy(() => import("../Layout/Dashboard/UserHome/MyReviews"));
+const AdminProfile = lazy(() =>
+  import("../Layout/Dashboard/Admin/AdminProfile/AdminProfile")
+);
+const ManageUsers = lazy(() =>
+  import("../Layout/Dashboard/Admin/ManageUsers/ManageUsers")
+);
+const ServeMeals = lazy(() =>
+  import("../Layout/Dashboard/Admin/ServeMeals/ServeMeals")
+);
+const AllMeals = lazy(() =>
+  import("../Layout/Dashboard/Admin/AllMeals/AllMeals")
+);
+const AddMeal = lazy(() => import("../Layout/Dashboard/Admin/AddMeal/AddMeal"));
+const AllReviews = lazy(() =>
+  import("../Layout/Dashboard/Admin/AllReviews/AllReviews")
+);
+const Upcoming = lazy(() =>
+  import("../Layout/Dashboard/Admin/Upcomingmeals/Upcoming")
+);
+const UpdateMeal = lazy(() =>
+  import("../Layout/Dashboard/Admin/UpdateMeal/UpdateMeal")
+);
+const PaymentSuccess = lazy(() =>
+  import("../Pages/PaymentSuccess/PaymentSuccess")
+);
+const PaymentFail = lazy(() => import("../Pages/PaymentFail/PaymentFail"));
 
 const router = createBrowserRouter([
   {
@@ -45,94 +63,136 @@ const router = createBrowserRouter([
       },
       {
         path: "/payment/success/:id",
-        element: <PaymentSuccess></PaymentSuccess>
+        element: <PaymentSuccess />,
       },
       {
         path: "/payment/fail/:id",
-        element: <PaymentFail></PaymentFail>
+        element: <PaymentFail />,
       },
       {
         path: "/sign-up",
-        element: <Signup></Signup>
+        element: <Signup />,
       },
       {
-        path: '/detail/:id',
-        element: <PrivateRoute><Detail></Detail></PrivateRoute>,
-        loader: ({ params }) => fetch(`http://localhost:5000/all_meals/${params.id}`)
+        path: "/detail/:id",
+        element: (
+          <PrivateRoute>
+            <Detail />
+          </PrivateRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/all_meals/${params.id}`),
       },
       {
-        path: '/meals',
-        element: <MealsAll />
+        path: "/meals",
+        element: <MealsAll />,
       },
       {
-        path: '/upcoming',
-        element: <UpcomingMeals></UpcomingMeals>
+        path: "/upcoming",
+        element: <UpcomingMeals />,
       },
       {
-        path: '/payment/:id',
-        element: <PrivateRoute> <Payment></Payment></PrivateRoute>,
-        loader: ({ params }) => fetch(`http://localhost:5000/plans/${params.id}`)
+        path: "/payment/:id",
+        element: (
+          <PrivateRoute>
+            <Payment />
+          </PrivateRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/plans/${params.id}`),
       },
-
-
     ],
   },
   {
-    path: 'dashboard',
-    element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
+    path: "dashboard",
+    element: (
+      <PrivateRoute>
+        <Dashboard />
+      </PrivateRoute>
+    ),
     errorElement: <ErrorPage />,
     children: [
       {
-        path: 'userHome',
-        element: <UserHome></UserHome>
-      },
-      
-      {
-        path: '/dashboard/request_meal',
-        element: <RequestMeals></RequestMeals>
+        path: "userHome",
+        element: <UserHome />,
       },
       {
-        path: '/dashboard/my_comment',
-        element: <MyComment></MyComment>
-      },
-      // admin Routs 
-      {
-        path: '/dashboard/adminProfile',
-        element: <AdminRoute><AdminProfile></AdminProfile></AdminRoute>
+        path: "/dashboard/request_meal",
+        element: <RequestMeals />,
       },
       {
-        path: '/dashboard/manageUsers',
-        element: <AdminRoute><ManageUsers></ManageUsers></AdminRoute>
+        path: "/dashboard/my_comment",
+        element: <MyComment />,
+      },
+      // Admin Routes
+      {
+        path: "/dashboard/adminProfile",
+        element: (
+          <AdminRoute>
+            <AdminProfile />
+          </AdminRoute>
+        ),
       },
       {
-        path: '/dashboard/allReviews',
-        element: <AdminRoute><AllReviews></AllReviews></AdminRoute>
+        path: "/dashboard/manageUsers",
+        element: (
+          <AdminRoute>
+            <ManageUsers />
+          </AdminRoute>
+        ),
       },
       {
-        path: '/dashboard/serveMeals',
-        element: <AdminRoute><ServeMeals></ServeMeals></AdminRoute>
+        path: "/dashboard/allReviews",
+        element: (
+          <AdminRoute>
+            <AllReviews />
+          </AdminRoute>
+        ),
       },
       {
-        path: '/dashboard/allMeals',
-        element: <AdminRoute><AllMeals></AllMeals></AdminRoute>
+        path: "/dashboard/serveMeals",
+        element: (
+          <AdminRoute>
+            <ServeMeals />
+          </AdminRoute>
+        ),
       },
       {
-        path: '/dashboard/addMeals',
-        element: <AdminRoute><AddMeal></AddMeal></AdminRoute>
+        path: "/dashboard/allMeals",
+        element: (
+          <AdminRoute>
+            <AllMeals />
+          </AdminRoute>
+        ),
       },
       {
-        path: '/dashboard/upcoming',
-        element: <AdminRoute><Upcoming></Upcoming></AdminRoute>
+        path: "/dashboard/addMeals",
+        element: (
+          <AdminRoute>
+            <AddMeal />
+          </AdminRoute>
+        ),
       },
       {
-        path: '/dashboard/updateMeal/:id',
-        element: <AdminRoute><UpdateMeal></UpdateMeal></AdminRoute>,
-        loader: ({ params }) => fetch(`http://localhost:5000/all_meals/${params.id}`)
-
-      }
-
-    ]
-  }
+        path: "/dashboard/upcoming",
+        element: (
+          <AdminRoute>
+            <Upcoming />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "/dashboard/updateMeal/:id",
+        element: (
+          <AdminRoute>
+            <UpdateMeal />
+          </AdminRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/all_meals/${params.id}`),
+      },
+    ],
+  },
 ]);
 
 export default router;
