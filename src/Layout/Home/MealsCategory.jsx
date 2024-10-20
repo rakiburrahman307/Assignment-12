@@ -3,8 +3,10 @@ import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import { useEffect, useState } from "react";
-import MealsCard from "./Mealscard";
 import './styleTab.css';
+import MealsCard from "./MealsCard";
+import MealsCardSkeleton from "./MealsCardSkeleton ";
+
 const MealsCategory = () => {
     const [types, setTypes] = useState([]);
     const axiosPublic = useAxiosPublic();
@@ -33,9 +35,16 @@ const MealsCategory = () => {
     const lunch = carts ? carts.filter(cart => cart.mealType === 'lunch') : [];
     const dinner = carts ? carts.filter(cart => cart.mealType === 'dinner') : [];
 
+    const renderCards = (meals) => {
+        if (isLoading) {
+            // Display skeletons when loading
+            return Array(3).fill(0).map((_, index) => <MealsCardSkeleton key={index} />);
+        }
+        return meals?.map(cart => <MealsCard key={cart?._id} carts={cart} />);
+    };
+
     return (
         <div>
-            {isLoading ? <span className="loading ml-[700px] loading-dots loading-lg"></span> : ""}
             {isError ? <p>Error fetching data</p> : ''}
 
             <Tabs>
@@ -44,33 +53,28 @@ const MealsCategory = () => {
                         types?.map(type => <Tab key={type?.id}>{type?.type}</Tab>)
                     }
                 </TabList>
-                <TabPanel>
-                    <div className='grid grid-cols-1 md:grid-cols-3 gap-5 mx-6'>
-                        {
-                            carts?.map(cart => <MealsCard key={cart?._id} carts={cart}></MealsCard>)
-                        }
-                    </div>
-                </TabPanel>
-                <TabPanel>
-                    <div className='grid grid-cols-1 md:grid-cols-3 gap-5 mx-6'>
-                        {
-                            breakFast?.map(cart => <MealsCard key={cart?._id} carts={cart}></MealsCard>)
-                        }
-                    </div>
-                </TabPanel>
-                <TabPanel>
-                    <div className='grid grid-cols-1 md:grid-cols-3 gap-5 mx-6'>
-                        {
-                            lunch?.map(cart => <MealsCard key={cart?._id} carts={cart}></MealsCard>)
-                        }
-                    </div>
-                </TabPanel>
 
                 <TabPanel>
+                    <div className='grid grid-cols-1 md:grid-cols-3 gap-5 mx-6 '>
+                        {renderCards(carts)}
+                    </div>
+                </TabPanel>
+                
+                <TabPanel>
                     <div className='grid grid-cols-1 md:grid-cols-3 gap-5 mx-6'>
-                        {
-                            dinner?.map(cart => <MealsCard key={cart?._id} carts={cart}></MealsCard>)
-                        }
+                        {renderCards(breakFast)}
+                    </div>
+                </TabPanel>
+                
+                <TabPanel>
+                    <div className='grid grid-cols-1 md:grid-cols-3 gap-5 mx-6'>
+                        {renderCards(lunch)}
+                    </div>
+                </TabPanel>
+                
+                <TabPanel>
+                    <div className='grid grid-cols-1 md:grid-cols-3 gap-5 mx-6 '>
+                        {renderCards(dinner)}
                     </div>
                 </TabPanel>
             </Tabs>

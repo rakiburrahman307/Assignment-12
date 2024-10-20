@@ -3,6 +3,10 @@
 ## Description
 Welcome to UniStayHub – where finding the ideal student accommodation is as easy as a click. We understand the unique needs of students, and that's why we've created a platform that brings together a wide range of housing options tailored to your lifestyle and preferences.
 
+## Check Admin dashboard
+- Email address : admin1@gmail.com
+- Password : Admin@1234
+
 ## Table of Contents
 - [Features](#features)
 - [Technologies Used](#technologies-used)
