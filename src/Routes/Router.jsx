@@ -3,6 +3,7 @@ import { lazy } from "react";
 import PrivateRoute from "./PrivateRoute";
 import AdminRoute from "./AdminRouts";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
+import Dashboard from "../Layout/Dashboard/Dashboard";
 
 const Root = lazy(() => import("../Layout/Root/Root"));
 const Home = lazy(() => import("../Layout/Home/Home"));
@@ -13,7 +14,6 @@ const MealsAll = lazy(() => import("../Pages/Meals/MealsAll"));
 const UpcomingMeals = lazy(() =>
   import("../Pages/UpcomingMeals/UpcomingMeals")
 );
-const Dashboard = lazy(() => import("../Layout/Dashboard/Dashboard"));
 const UserHome = lazy(() => import("../Layout/Dashboard/UserHome/UserHome"));
 const Payment = lazy(() => import("../Pages/Payment/Payment"));
 const RequestMeals = lazy(() =>

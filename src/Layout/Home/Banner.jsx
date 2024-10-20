@@ -16,11 +16,11 @@ const Banner = () => {
     <div>
       <div className='absolute flex items-center h-full left-0 top-0 bg-gradient-to-r from-[#151515] to-[rgba(21, 21, 21, 0.00)]'>
         <div
-          className='w-1/2 text-white pl-10 space-y-8'
+          className='w-full md:w-1/2 text-white pl-10 space-y-8'
           data-aos='zoom-in-left'
         >
-          <h2 className='text-6xl font-bold'>Radiance in Student Living</h2>
-          <p>
+          <h2 className='text-4xl md:text-6xl font-bold'>Radiance in Student Living</h2>
+          <p className='text-left'>
             UniStayHub Where Every Student Discovers More than a Stay—A Home
             Where Connections Thrive and Memories Flourish. Experience Unmatched
             Comfort, Community, and Convenience. Your Journey Begins Here, at

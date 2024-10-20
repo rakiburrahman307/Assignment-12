@@ -17,7 +17,7 @@ const OurPlans = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mx-5">
 
                 {
-                    plans.map(plan => <div data-aos="fade-up" key={plan?.id} className="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+                    plans?.map(plan => <div data-aos="fade-up" key={plan?._id} className="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
                         <h5 className="mb-4 text-xl font-medium text-gray-500 dark:text-gray-400">{plan?.name}</h5>
                         <div className="flex items-baseline text-gray-900 dark:text-white">
                             <span className="text-3xl font-semibold">$</span>
